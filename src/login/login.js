@@ -3,7 +3,18 @@ import Button from "@material-ui/core/Button";
 import loginStyles from "./styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 
+const firebase = require("firebase");
+
 class LoginComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: "kevinho@test.com",
+      password: "abcdefghij",
+      currentUser: null
+    };
+  }
+
   render() {
     const { classes } = this.props;
     console.log(classes);
@@ -22,8 +33,16 @@ class LoginComponent extends React.Component {
     );
   }
 
-  toDashboard = () => {
-    this.props.history.push("/dashboard");
+  toDashboard = async () => {
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(u => {
+        this.props.history.push("/dashboard");
+      })
+      .catch(err => {
+        console.log("Error:" + err.toString());
+      });
   };
 }
 
