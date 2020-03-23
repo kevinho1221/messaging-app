@@ -2,8 +2,15 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import loginStyles from "./styles";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import Input from "@material-ui/core/Input";
+import FormControl from "@material-ui/core/FormControl";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Lock from "@material-ui/icons/Lock";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 
 const firebase = require("firebase");
 
@@ -11,8 +18,8 @@ class LoginComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: "kevinho@test.com",
-      password: "abcdefg",
+      email: "",
+      password: "",
       currentUser: null,
       loginerror: ""
     };
@@ -24,22 +31,85 @@ class LoginComponent extends React.Component {
 
     return (
       <div className={classes.main}>
-        <Paper elevation="2">
-          <h1>Login Page</h1>
-          <Typography variant="h4">Login page testing</Typography>
-          <h3>{this.state.loginerror}</h3>
-          <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={this.toDashboard}
-          >
-            Log In
-          </Button>
+        <Paper>
+          <h1 align="center">Login Page</h1>
+          <form onSubmit={this.submitForm}>
+            <FormControl fullWidth>
+              <div>
+                <InputLabel htmlFor="emailInput">Enter Your Email</InputLabel>
+                <Input
+                  fullWidth
+                  name="email"
+                  id="emailInput"
+                  onChange={this.userInputHandler}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  }
+                ></Input>
+              </div>
+            </FormControl>
+            <FormControl fullWidth>
+              <div>
+                <InputLabel htmlFor="passwordInput">
+                  Enter Your Password
+                </InputLabel>
+                <Input
+                  type="password"
+                  fullWidth
+                  name="password"
+                  id="passwordInput"
+                  onChange={this.userInputHandler}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Lock />
+                    </InputAdornment>
+                  }
+                ></Input>
+              </div>
+            </FormControl>
+
+            <h5>{this.state.loginerror}</h5>
+
+            <Button
+              className={classes.buttonstyle}
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Log In
+            </Button>
+
+            <Link onClick={this.toSignup} className={classes.linkstyle}>
+              Sign Up!
+            </Link>
+          </form>
         </Paper>
       </div>
     );
   }
+
+  submitForm = e => {
+    e.preventDefault();
+
+    if (this.state.email != "" && this.state.password != "") {
+      this.toDashboard();
+    } else {
+      this.setState({
+        loginerror: "Error: Please enter a username and password."
+      });
+    }
+  };
+
+  userInputHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  toSignup = () => {
+    this.props.history.push("/signup");
+  };
 
   toDashboard = async () => {
     await firebase
@@ -50,7 +120,6 @@ class LoginComponent extends React.Component {
       })
       .catch(err => {
         this.setState({ loginerror: err.toString() });
-        console.log("Error:" + err.toString());
       });
   };
 }

@@ -1,8 +1,16 @@
 import React from "react";
+import clsx from "clsx";
 import Button from "@material-ui/core/Button";
 import signupStyles from "./styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { firestore } from "firebase";
+import Input from "@material-ui/core/Input";
+import Paper from "@material-ui/core/Paper";
+import FormControl from "@material-ui/core/FormControl";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Lock from "@material-ui/icons/Lock";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 const firebase = require("firebase");
 
@@ -10,8 +18,10 @@ class SignupComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: "lisanho@test.com",
-      password: "abcdefg"
+      email: "",
+      password: "",
+      passwordconf: "",
+      signuperror: ""
     };
   }
 
@@ -20,19 +30,97 @@ class SignupComponent extends React.Component {
 
     return (
       <div className={classes.main}>
-        <h1>Sign Up Page</h1>
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          onClick={this.addToFirebase}
-        >
-          Sign Up
-        </Button>
+        <Paper>
+          <h1 align="center">Sign Up!</h1>
+
+          <form onSubmit={this.submitForm}>
+            <FormControl fullWidth>
+              <div>
+                <InputLabel htmlFor="emailInput">Enter Your Email</InputLabel>
+                <Input
+                  fullWidth
+                  name="email"
+                  id="emailInput"
+                  onChange={this.userInputHandler}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  }
+                ></Input>
+              </div>
+            </FormControl>
+            <FormControl fullWidth>
+              <div>
+                <InputLabel
+                  htmlFor="passwordInput"
+                  className={classes.inputstyle}
+                >
+                  Enter Your Password
+                </InputLabel>
+                <Input
+                  type="password"
+                  fullWidth
+                  name="password"
+                  id="passwordInput"
+                  onChange={this.userInputHandler}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Lock />
+                    </InputAdornment>
+                  }
+                ></Input>
+              </div>
+            </FormControl>
+            <FormControl fullWidth>
+              <div>
+                <InputLabel htmlFor="passwordconfInput">
+                  Confirm Your Password
+                </InputLabel>
+                <Input
+                  type="password"
+                  fullWidth
+                  name="passwordconf"
+                  id="passwordconfInput"
+                  onChange={this.userInputHandler}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Lock />
+                    </InputAdornment>
+                  }
+                ></Input>
+              </div>
+            </FormControl>
+
+            <h5>{this.state.signuperror}</h5>
+            <Button
+              className={classes.buttonstyle}
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Sign Up
+            </Button>
+          </form>
+        </Paper>
       </div>
     );
   }
 
+  submitForm = e => {
+    e.preventDefault();
+
+    if (this.state.password === this.state.passwordconf) {
+      this.addToFirebase();
+    } else {
+      this.setState({ signuperror: "The passwords do not match!" });
+    }
+  };
+
+  userInputHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   addToFirebase = () => {
     firebase
       .auth()
@@ -47,9 +135,10 @@ class SignupComponent extends React.Component {
           .set(theUser)
           .then(this.props.history.push("/dashboard"));
         console.log("signup up successfully");
-        console.log(u);
+        //console.log(u);
       })
       .catch(err => {
+        this.setState({ signuperror: err.toString() });
         console.log(err.toString());
       });
   };
