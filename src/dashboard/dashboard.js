@@ -29,23 +29,32 @@ class DashboardComponent extends React.Component {
         await firebase
           .firestore()
           .collection("chats")
-          .get()
-          .then(async snapshot => {
+          .where("users", "array-contains", user.email)
+          .onSnapshot(docSnapshot => {
+            const thechats = docSnapshot.docs.map(doc => doc.data());
+            console.log(thechats);
+          });
+        /*.then(async snapshot => {
             //await this.setState({ chats: snapshot.docs});
 
-            console.log(snapshot.docs[0].data());
-            const thechats = snapshot.forEach(doc => {});
+            console.log(snapshot.docs);
+            const thechats = snapshot.docs.map(doc => {
+              doc.data();
+            });
+            console.log(thechats);
+            //await this.setState({ chats: thechats });
+            //console.log(this.state.chats);
 
-            /*snapshot.forEach(async doc => {
+            snapshot.forEach(async doc => {
               console.log(doc.id);
               console.log(doc.data().messages);
               this.setState({ chats: doc.data() });
               console.log(this.state.chats);
-            });*/
+            });
           })
           .catch(err => {
             console.log("Error getting documents", err);
-          });
+          });*/
       }
     });
 
