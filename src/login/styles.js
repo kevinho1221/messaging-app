@@ -9,7 +9,8 @@ const loginStyles = () => ({
     background: "lightblue"
   },
   linkstyle: {
-    fontSize: 14
+    fontSize: 14,
+    cursor: "pointer"
   }
 });
 
