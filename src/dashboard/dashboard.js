@@ -1,5 +1,7 @@
 import React from "react";
 import ChatSelectorComponent from "../chatselector/chatselector";
+import dashboardStyles from "./styles.js";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const firebase = require("firebase");
 
@@ -16,7 +18,10 @@ class DashboardComponent extends React.Component {
     return (
       <div>
         <div>Dashboard Page</div>
-        <ChatSelectorComponent chats={this.state.chats}></ChatSelectorComponent>
+        <ChatSelectorComponent
+          chats={this.state.chats}
+          currentuser={this.state.email}
+        ></ChatSelectorComponent>
       </div>
     );
   }
@@ -30,10 +35,13 @@ class DashboardComponent extends React.Component {
           .firestore()
           .collection("chats")
           .where("users", "array-contains", user.email)
-          .onSnapshot(docSnapshot => {
+          .onSnapshot(async docSnapshot => {
             const thechats = docSnapshot.docs.map(doc => doc.data());
-            console.log(thechats);
+            //console.log(thechats);
+            await this.setState({ chats: thechats });
+            //console.log(this.state.chats);
           });
+
         /*.then(async snapshot => {
             //await this.setState({ chats: snapshot.docs});
 
@@ -71,4 +79,4 @@ class DashboardComponent extends React.Component {
   };
 }
 
-export default DashboardComponent;
+export default withStyles(dashboardStyles)(DashboardComponent);
