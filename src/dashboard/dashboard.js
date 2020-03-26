@@ -29,7 +29,7 @@ class DashboardComponent extends React.Component {
           setSelectedmessages={this.setSelectedmessages}
         ></ChatSelectorComponent>
         <ConvodisplayComponent
-          selectedchatIndex={this.state.selectedchatIndex}
+          selectedmessages={this.state.selectedmessages}
         ></ConvodisplayComponent>
       </div>
     );

@@ -46,9 +46,9 @@ class ChatSelectorComponent extends React.Component {
       </div>
     );
   }
-  handleListItemClick = index => {
-    this.props.setSelectedchatIndex(index);
-    this.props.setSelectedmessages();
+  handleListItemClick = async index => {
+    await this.props.setSelectedchatIndex(index);
+    await this.props.setSelectedmessages();
   };
 }
 

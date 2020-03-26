@@ -2,27 +2,21 @@ import React from "react";
 import convodisplayStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-const firebase = require("firebase");
-
 class convodisplayComponent extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      selectedchat: []
-    };
-  }
-
   render() {
     const { classes } = this.props;
 
     return (
-      <div>
+      <div className={classes.main}>
         <div className={classes.convoheader}>Conversation Header</div>
-        <div className={classes.main}>Conversation Display Component</div>
+        <div>Conversation Display Component</div>
         <div>
-          {this.state.selectedchat.map((messages, index) => {
-            return <div key={index}>{messages.message}</div>;
+          {this.props.selectedmessages.map((message, index) => {
+            return (
+              <div className={classes.messages} key={index}>
+                {message.message}
+              </div>
+            );
           })}
         </div>
       </div>

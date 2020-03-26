@@ -8,6 +8,11 @@ const convodisplayStyles = () => ({
     width: "70%",
     marginLeft: "30%",
     background: "coral"
+  },
+  messages: {
+    width: "70%",
+    marginLeft: "30%",
+    background: "coral"
   }
 });
 
