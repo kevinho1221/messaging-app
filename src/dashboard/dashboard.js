@@ -2,6 +2,7 @@ import React from "react";
 import ChatSelectorComponent from "../chatselector/chatselector";
 import dashboardStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
+import ConvodisplayComponent from "../convodisplay/convodisplay";
 
 const firebase = require("firebase");
 
@@ -10,21 +11,41 @@ class DashboardComponent extends React.Component {
     super();
     this.state = {
       email: "",
-      chats: []
+      chats: [],
+      selectedchatIndex: 0,
+      selectedmessages: []
     };
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <div>
-        <div>Dashboard Page</div>
+      <div className={classes.main}>
         <ChatSelectorComponent
           chats={this.state.chats}
           currentuser={this.state.email}
+          setSelectedchatIndex={this.setSelectedchatIndex}
+          setSelectedmessages={this.setSelectedmessages}
         ></ChatSelectorComponent>
+        <ConvodisplayComponent
+          selectedchatIndex={this.state.selectedchatIndex}
+        ></ConvodisplayComponent>
       </div>
     );
   }
+
+  setSelectedchatIndex = async index => {
+    await this.setState({ selectedchatIndex: index });
+    console.log(this.state.selectedchatIndex);
+  };
+
+  setSelectedmessages = async () => {
+    await this.setState({
+      selectedmessages: this.state.chats[this.state.selectedchatIndex].messages
+    });
+    console.log(this.state.chats[this.state.selectedchatIndex].messages);
+  };
 
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(async user => {

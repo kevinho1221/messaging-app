@@ -1,10 +1,12 @@
 const dashboardStyles = () => ({
   main: {
-    width: "30%",
-    margin: "auto",
-    background: "lightblue"
+    margin: 0,
+    padding: 0,
+    background: "red"
   },
-  inputstyle: {}
+  title: {
+    background: "red"
+  }
 });
 
 export default dashboardStyles;

@@ -14,12 +14,10 @@ class ChatSelectorComponent extends React.Component {
   }
 
   render() {
-    const chats = this.props.chats;
     const { classes } = this.props;
 
     return (
       <div className={classes.main}>
-        <div>Chat Selector Page</div>
         <List>
           {this.props.chats.map((chat, index) => {
             console.log(
@@ -27,7 +25,13 @@ class ChatSelectorComponent extends React.Component {
             );
             return (
               <div key={index}>
-                <ListItem button>
+                <ListItem
+                  button
+                  selected={this.state.selectedIndex === index}
+                  onClick={e => {
+                    this.handleListItemClick(index);
+                  }}
+                >
                   <ListItemText
                     primary={chat.users.filter(
                       user => user !== this.props.currentuser
@@ -42,6 +46,10 @@ class ChatSelectorComponent extends React.Component {
       </div>
     );
   }
+  handleListItemClick = index => {
+    this.props.setSelectedchatIndex(index);
+    this.props.setSelectedmessages();
+  };
 }
 
 export default withStyles(chatselectorStyles)(ChatSelectorComponent);
