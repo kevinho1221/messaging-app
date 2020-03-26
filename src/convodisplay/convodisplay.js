@@ -9,16 +9,22 @@ class convodisplayComponent extends React.Component {
     return (
       <div className={classes.main}>
         <div className={classes.convoheader}>Conversation Header</div>
-        <div>Conversation Display Component</div>
-        <div>
-          {this.props.selectedmessages.map((message, index) => {
+
+        {this.props.selectedmessages.map((messages, index) => {
+          if (messages.sender === this.props.email) {
             return (
-              <div className={classes.messages} key={index}>
-                {message.message}
+              <div className={classes.messagesUser} key={index}>
+                {messages.message}
               </div>
             );
-          })}
-        </div>
+          } else {
+            return (
+              <div className={classes.messagesOther} key={index}>
+                {messages.message}
+              </div>
+            );
+          }
+        })}
       </div>
     );
   }
