@@ -12,7 +12,7 @@ class convodisplayComponent extends React.Component {
           Conversation Header
         </div>
         <div className={classes.messages} id="convodisplay">
-          {this.props.selectedmessages.map((messages, index) => {
+          {this.props.selectedmessages.reverse().map((messages, index) => {
             if (messages.sender === this.props.email) {
               return (
                 <div className={classes.messagesUser} key={index}>
@@ -28,7 +28,6 @@ class convodisplayComponent extends React.Component {
             }
           })}
         </div>
-        <div className={classes.anchor}></div>
       </div>
     );
   }

@@ -10,6 +10,9 @@ const convodisplayStyles = () => ({
     boxSizing: "border-box"
   },
   messages: {
+    display: "flex",
+    flexDirection: "column-reverse",
+    alignItems: "center",
     width: "70vw",
     marginLeft: "30%",
     position: "absolute",
@@ -17,7 +20,6 @@ const convodisplayStyles = () => ({
     overflow: "auto",
     height: "calc(100vh - 100px)",
     background: "yellow",
-    //margin: "20px",
     overflowY: "scroll",
     boxSizing: "border-box",
     padding: "25px"
@@ -26,11 +28,12 @@ const convodisplayStyles = () => ({
     width: "30%",
     background: "coral",
     float: "right",
-    position: "relative",
+    //position: "relative",
     clear: "both",
     padding: "20px",
     borderRadius: "15px",
-    marginRight: "1%",
+    //marginRight: "20%",
+    marginLeft: "65%",
     wordWrap: "break-word",
     marginTop: "10px"
   },
@@ -38,11 +41,12 @@ const convodisplayStyles = () => ({
     width: "30%",
     background: "lightgreen",
     float: "left",
-    position: "relative",
+    //position: "relative",
     clear: "both",
     padding: "20px",
     borderRadius: "15px",
-    marginLeft: "1%",
+    //marginLeft: "20%",
+    marginRight: "65%",
     wordWrap: "break-word",
     marginTop: "10px"
   }
