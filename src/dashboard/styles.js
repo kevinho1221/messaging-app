@@ -6,6 +6,14 @@ const dashboardStyles = () => ({
   },
   title: {
     background: "red"
+  },
+  testscroll: {
+    margin: "20px",
+    width: "70%",
+    marginLeft: "30%",
+    position: "absolute",
+    top: "100px",
+    overflowY: "scroll"
   }
 });
 

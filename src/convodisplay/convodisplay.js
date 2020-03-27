@@ -7,24 +7,27 @@ class convodisplayComponent extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.main}>
-        <div className={classes.convoheader}>Conversation Header</div>
-
-        {this.props.selectedmessages.map((messages, index) => {
-          if (messages.sender === this.props.email) {
-            return (
-              <div className={classes.messagesUser} key={index}>
-                {messages.message}
-              </div>
-            );
-          } else {
-            return (
-              <div className={classes.messagesOther} key={index}>
-                {messages.message}
-              </div>
-            );
-          }
-        })}
+      <div>
+        <div className={classes.convoheader} align="center">
+          Conversation Header
+        </div>
+        <div className={classes.messages}>
+          {this.props.selectedmessages.map((messages, index) => {
+            if (messages.sender === this.props.email) {
+              return (
+                <div className={classes.messagesUser} key={index}>
+                  {messages.message}
+                </div>
+              );
+            } else {
+              return (
+                <div className={classes.messagesOther} key={index}>
+                  {messages.message}
+                </div>
+              );
+            }
+          })}
+        </div>
       </div>
     );
   }
