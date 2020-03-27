@@ -1,20 +1,26 @@
 const convodisplayStyles = () => ({
   convoheader: {
-    width: "70%",
+    width: "70vw",
+    height: "50px",
     marginLeft: "30%",
     background: "violet",
     padding: "20px",
-    position: "fixed"
+    position: "fixed",
+    zIndex: "1",
+    boxSizing: "border-box"
   },
   messages: {
-    margin: "20px",
-    width: "70%",
+    width: "70vw",
     marginLeft: "30%",
     position: "absolute",
-    top: "40px",
-    overflowY: "scroll",
+    top: "50px",
     overflow: "auto",
-    height: "100vh"
+    height: "calc(100vh - 100px)",
+    background: "yellow",
+    //margin: "20px",
+    overflowY: "scroll",
+    boxSizing: "border-box",
+    padding: "25px"
   },
   messagesUser: {
     width: "30%",

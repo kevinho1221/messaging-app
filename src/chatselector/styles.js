@@ -1,12 +1,10 @@
 const chatselectorStyles = () => ({
   main: {
-    width: "30%",
-    margin: "auto",
+    width: "30vw",
     background: "lightblue",
     left: "0",
-    position: "absolute",
+    position: "fixed",
     overflow: "auto",
-    overflowY: "scroll",
     height: "100vh"
   },
   list: {}

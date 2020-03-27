@@ -11,7 +11,7 @@ class convodisplayComponent extends React.Component {
         <div className={classes.convoheader} align="center">
           Conversation Header
         </div>
-        <div className={classes.messages}>
+        <div className={classes.messages} id="convodisplay">
           {this.props.selectedmessages.map((messages, index) => {
             if (messages.sender === this.props.email) {
               return (
@@ -28,9 +28,19 @@ class convodisplayComponent extends React.Component {
             }
           })}
         </div>
+        <div className={classes.anchor}></div>
       </div>
     );
   }
+
+  componentDidMount = () => {
+    const container = document.getElementById("convodisplay");
+    if (container) container.scrollTo(0, container.scrollHeight);
+  };
+  componentDidUpdate = () => {
+    const container = document.getElementById("convodisplay");
+    if (container) container.scrollTo(0, container.scrollHeight);
+  };
 
   /*componentDidMount = () => {
     firebase.auth().onAuthStateChanged(async user => {

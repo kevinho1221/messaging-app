@@ -3,6 +3,7 @@ import ChatSelectorComponent from "../chatselector/chatselector";
 import dashboardStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
 import ConvodisplayComponent from "../convodisplay/convodisplay";
+import ChatInputComponent from "../chatinput/chatinput";
 
 const firebase = require("firebase");
 
@@ -32,6 +33,7 @@ class DashboardComponent extends React.Component {
           email={this.state.email}
           selectedmessages={this.state.selectedmessages}
         ></ConvodisplayComponent>
+        <ChatInputComponent></ChatInputComponent>
       </div>
     );
   }
