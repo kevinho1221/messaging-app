@@ -21,9 +21,9 @@ class ChatSelectorComponent extends React.Component {
         <div className={classes.list}>
           <List>
             {this.props.chats.map((chat, index) => {
-              console.log(
+              /*console.log(
                 chat.users.filter(user => user !== this.props.currentuser)
-              );
+              );*/
               return (
                 <div key={index}>
                   <ListItem
@@ -41,7 +41,6 @@ class ChatSelectorComponent extends React.Component {
                   </ListItem>
                 </div>
               );
-              //return <p key={index}>{chat.messages[0].users}</p>;
             })}
           </List>
         </div>

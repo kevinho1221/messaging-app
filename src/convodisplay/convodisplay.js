@@ -11,6 +11,7 @@ class convodisplayComponent extends React.Component {
         <div className={classes.convoheader} align="center">
           Conversation Header
         </div>
+
         <div className={classes.messages} id="convodisplay">
           {this.props.selectedmessages.reverse().map((messages, index) => {
             if (messages.sender === this.props.email) {

@@ -20,35 +20,40 @@ const convodisplayStyles = () => ({
     overflow: "auto",
     height: "calc(100vh - 100px)",
     background: "yellow",
-    overflowY: "scroll",
+    //overflowY: "scroll",
     boxSizing: "border-box",
-    padding: "25px"
+    //padding: "10px",
+    border: "10px yellow solid"
+
+    //need to somehow get padding
+    //maybe psudoelement?
+    //the padding works without using display flex
   },
   messagesUser: {
     width: "30%",
     background: "coral",
     float: "right",
-    //position: "relative",
     clear: "both",
     padding: "20px",
     borderRadius: "15px",
-    //marginRight: "20%",
     marginLeft: "65%",
     wordWrap: "break-word",
+    boxSizing: "border-box",
     marginTop: "10px"
+    //margin: "auto"
   },
   messagesOther: {
     width: "30%",
     background: "lightgreen",
     float: "left",
-    //position: "relative",
     clear: "both",
     padding: "20px",
     borderRadius: "15px",
-    //marginLeft: "20%",
     marginRight: "65%",
     wordWrap: "break-word",
+    boxSizing: "border-box",
     marginTop: "10px"
+    //margin: "auto"
   }
 });
 
