@@ -63,20 +63,20 @@ class DashboardComponent extends React.Component {
     return docName;
   };
 
-  setSelectedchatIndex = async index => {
-    await this.setState({ selectedchatIndex: index });
+  setSelectedchatIndex = index => {
+    this.setState({ selectedchatIndex: index });
     console.log(this.state.selectedchatIndex);
     console.log(this.state.chats[this.state.selectedchatIndex].users);
   };
 
-  setSelectedmessages = async () => {
-    await this.setState({
+  setSelectedmessages = () => {
+    this.setState({
       selectedmessages: this.state.chats[this.state.selectedchatIndex].messages
     });
     console.log(this.state.chats[this.state.selectedchatIndex].messages);
   };
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
         this.setState({ email: user.email });
@@ -89,7 +89,9 @@ class DashboardComponent extends React.Component {
             const thechats = docSnapshot.docs.map(doc => doc.data());
             //console.log(thechats);
             await this.setState({ chats: thechats });
-            //console.log(this.state.chats);
+            this.setSelectedmessages();
+
+            console.log("pokemon");
           });
 
         /*.then(async snapshot => {

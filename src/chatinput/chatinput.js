@@ -19,8 +19,10 @@ class ChatInputComponent extends React.Component {
     return (
       <div className={classes.main}>
         <TextField
+          id="chatTextBox"
           className={classes.chatTextBox}
           onChange={this.handleInputChange}
+          value={this.state.message}
         ></TextField>
         <Button color="primary" variant="contained" onClick={this.sendMessage}>
           Send
@@ -29,8 +31,9 @@ class ChatInputComponent extends React.Component {
     );
   }
 
-  sendMessage = () => {
+  sendMessage = async () => {
     this.props.sendMessage(this.state.message);
+    await this.setState({ message: "" });
   };
 
   handleInputChange = async e => {
