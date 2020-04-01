@@ -4,6 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import ChatSelectorHeaderComponent from "../chatselectorheader/chatselectorheader";
 
 class ChatSelectorComponent extends React.Component {
   constructor() {
@@ -19,6 +20,7 @@ class ChatSelectorComponent extends React.Component {
 
     return (
       <div className={classes.main}>
+        <ChatSelectorHeaderComponent></ChatSelectorHeaderComponent>
         <div className={classes.list}>
           <List>
             {this.props.chats.map((chat, index) => {

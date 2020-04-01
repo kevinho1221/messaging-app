@@ -26,6 +26,9 @@ class DashboardComponent extends React.Component {
       <div className={classes.main}>
         {
           //CREATE A HEADING COMPONENT HERE}
+          //first add ability to send new messages and start new conversations
+          //then probably need to recreate all the users over again so that the have first and last names
+          //then use those to create the avatars
         }
         <ChatSelectorComponent
           chats={this.state.chats}
