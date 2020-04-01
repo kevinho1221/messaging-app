@@ -33,14 +33,40 @@ class DashboardComponent extends React.Component {
           email={this.state.email}
           selectedmessages={this.state.selectedmessages}
         ></ConvodisplayComponent>
-        <ChatInputComponent></ChatInputComponent>
+        <ChatInputComponent sendMessage={this.sendMessage}></ChatInputComponent>
       </div>
     );
   }
 
+  sendMessage = message => {
+    const docName = this.getDocName();
+    firebase
+      .firestore()
+      .collection("chats")
+      .doc(docName)
+      .update({
+        messages: firebase.firestore.FieldValue.arrayUnion({
+          message: message,
+          sender: this.state.email,
+          timestamp: Date.now()
+        })
+      })
+      .then(console.log("Message Sent"));
+  };
+
+  getDocName = () => {
+    const selectedUser = this.state.chats[
+      this.state.selectedchatIndex
+    ].users.filter(email => email != this.state.email);
+    const docName = [this.state.email, selectedUser].sort().join(":");
+    //console.log(docName);
+    return docName;
+  };
+
   setSelectedchatIndex = async index => {
     await this.setState({ selectedchatIndex: index });
     console.log(this.state.selectedchatIndex);
+    console.log(this.state.chats[this.state.selectedchatIndex].users);
   };
 
   setSelectedmessages = async () => {

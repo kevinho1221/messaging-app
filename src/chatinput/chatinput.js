@@ -29,7 +29,9 @@ class ChatInputComponent extends React.Component {
     );
   }
 
-  sendMessage = () => {};
+  sendMessage = () => {
+    this.props.sendMessage(this.state.message);
+  };
 
   handleInputChange = async e => {
     await this.setState({ message: e.target.value });
