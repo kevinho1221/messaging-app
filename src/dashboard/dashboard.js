@@ -34,7 +34,10 @@ class DashboardComponent extends React.Component {
           email={this.state.email}
           selectedmessages={this.state.selectedmessages}
         ></ConvodisplayComponent>
-        <ChatInputComponent sendMessage={this.sendMessage}></ChatInputComponent>
+        <ChatInputComponent
+          sendMessage={this.sendMessage}
+          hasSelectedOnce={this.state.hasSelectedOnce}
+        ></ChatInputComponent>
       </div>
     );
   }

@@ -16,20 +16,28 @@ class ChatInputComponent extends React.Component {
 
   render() {
     const { classes } = this.props;
-    return (
-      <div className={classes.main}>
-        <TextField
-          id="chatTextBox"
-          className={classes.chatTextBox}
-          onChange={this.handleInputChange}
-          value={this.state.message}
-          onKeyDown={this.onKeyDownHandler}
-        ></TextField>
-        <Button color="primary" variant="contained" onClick={this.sendMessage}>
-          Send
-        </Button>
-      </div>
-    );
+    if (this.props.hasSelectedOnce == true) {
+      return (
+        <div className={classes.main}>
+          <TextField
+            id="chatTextBox"
+            className={classes.chatTextBox}
+            onChange={this.handleInputChange}
+            value={this.state.message}
+            onKeyDown={this.onKeyDownHandler}
+          ></TextField>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={this.sendMessage}
+          >
+            Send
+          </Button>
+        </div>
+      );
+    } else {
+      return <div className={classes.main}></div>;
+    }
   }
 
   onKeyDownHandler = e => {
