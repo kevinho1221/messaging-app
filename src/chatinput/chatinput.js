@@ -4,8 +4,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-const firebase = require("firebase");
-
 class ChatInputComponent extends React.Component {
   constructor() {
     super();
@@ -52,7 +50,7 @@ class ChatInputComponent extends React.Component {
 
   handleInputChange = async e => {
     await this.setState({ message: e.target.value });
-    console.log(this.state.message);
+    //console.log(this.state.message);
   };
 }
 

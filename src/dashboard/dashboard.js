@@ -24,6 +24,9 @@ class DashboardComponent extends React.Component {
 
     return (
       <div className={classes.main}>
+        {
+          //CREATE A HEADING COMPONENT HERE}
+        }
         <ChatSelectorComponent
           chats={this.state.chats}
           currentuser={this.state.email}
@@ -43,19 +46,21 @@ class DashboardComponent extends React.Component {
   }
 
   sendMessage = message => {
-    const docName = this.getDocName();
-    firebase
-      .firestore()
-      .collection("chats")
-      .doc(docName)
-      .update({
-        messages: firebase.firestore.FieldValue.arrayUnion({
-          message: message,
-          sender: this.state.email,
-          timestamp: Date.now()
+    if (message.replace(/\s/g, "").length) {
+      const docName = this.getDocName();
+      firebase
+        .firestore()
+        .collection("chats")
+        .doc(docName)
+        .update({
+          messages: firebase.firestore.FieldValue.arrayUnion({
+            message: message,
+            sender: this.state.email,
+            timestamp: Date.now()
+          })
         })
-      })
-      .then(console.log("Message Sent"));
+        .then(console.log("Message Sent"));
+    }
   };
 
   getDocName = () => {

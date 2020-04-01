@@ -9,7 +9,8 @@ class ChatSelectorComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: ""
+      email: "",
+      selectedIndex: null
     };
   }
 
@@ -48,6 +49,9 @@ class ChatSelectorComponent extends React.Component {
     );
   }
   handleListItemClick = async index => {
+    //set selected index so that selected chat stays highlighted
+    await this.setState({ selectedIndex: index });
+
     await this.props.setSelectedchatIndex(index);
     this.props.setSelectedmessages();
   };
