@@ -8,7 +8,10 @@ const signupStyles = () => ({
     margin: "auto",
     background: "lightblue"
   },
-  inputstyle: {}
+  linkstyle: {
+    fontSize: 14,
+    cursor: "pointer"
+  }
 });
 
 export default signupStyles;

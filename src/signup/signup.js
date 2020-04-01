@@ -10,6 +10,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Lock from "@material-ui/icons/Lock";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Email from "@material-ui/icons/Email";
+import Link from "@material-ui/core/Link";
 
 const firebase = require("firebase");
 
@@ -17,6 +19,8 @@ class SignupComponent extends React.Component {
   constructor() {
     super();
     this.state = {
+      firstname: "",
+      lastname: "",
       email: "",
       password: "",
       passwordconf: "",
@@ -35,6 +39,38 @@ class SignupComponent extends React.Component {
           <form onSubmit={this.submitForm}>
             <FormControl fullWidth>
               <div>
+                <InputLabel htmlFor="firstnameInput">First Name</InputLabel>
+                <Input
+                  fullWidth
+                  name="firstname"
+                  id="firstnameInput"
+                  onChange={this.userInputHandler}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  }
+                ></Input>
+              </div>
+            </FormControl>
+            <FormControl fullWidth>
+              <div>
+                <InputLabel htmlFor="lastnameInput">Last Name</InputLabel>
+                <Input
+                  fullWidth
+                  name="lastname"
+                  id="lastnameInput"
+                  onChange={this.userInputHandler}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  }
+                ></Input>
+              </div>
+            </FormControl>
+            <FormControl fullWidth>
+              <div>
                 <InputLabel htmlFor="emailInput">Enter Your Email</InputLabel>
                 <Input
                   fullWidth
@@ -43,7 +79,7 @@ class SignupComponent extends React.Component {
                   onChange={this.userInputHandler}
                   startAdornment={
                     <InputAdornment position="start">
-                      <AccountCircle />
+                      <Email />
                     </InputAdornment>
                   }
                 ></Input>
@@ -101,11 +137,18 @@ class SignupComponent extends React.Component {
             >
               Sign Up
             </Button>
+            <Link onClick={this.toLogin} className={classes.linkstyle}>
+              Log In!
+            </Link>
           </form>
         </Paper>
       </div>
     );
   }
+
+  toLogin = () => {
+    this.props.history.push("/login");
+  };
 
   submitForm = e => {
     e.preventDefault();
@@ -126,7 +169,9 @@ class SignupComponent extends React.Component {
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(u => {
         const theUser = {
-          email: u.user.email
+          email: u.user.email,
+          firstname: this.state.firstname,
+          lastname: this.state.lastname
         };
         firestore()
           .collection("users")
