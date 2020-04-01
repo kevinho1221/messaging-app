@@ -14,7 +14,8 @@ class DashboardComponent extends React.Component {
       email: "",
       chats: [],
       selectedchatIndex: 0,
-      selectedmessages: []
+      selectedmessages: [],
+      hasSelectedOnce: false
     };
   }
 
@@ -65,6 +66,7 @@ class DashboardComponent extends React.Component {
 
   setSelectedchatIndex = index => {
     this.setState({ selectedchatIndex: index });
+    this.setState({ hasSelectedOnce: true });
     console.log(this.state.selectedchatIndex);
     console.log(this.state.chats[this.state.selectedchatIndex].users);
   };
@@ -76,7 +78,7 @@ class DashboardComponent extends React.Component {
     console.log(this.state.chats[this.state.selectedchatIndex].messages);
   };
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
         this.setState({ email: user.email });
@@ -89,9 +91,12 @@ class DashboardComponent extends React.Component {
             const thechats = docSnapshot.docs.map(doc => doc.data());
             //console.log(thechats);
             await this.setState({ chats: thechats });
-            this.setSelectedmessages();
 
-            console.log("pokemon");
+            if (this.state.hasSelectedOnce === true) {
+              this.setSelectedmessages();
+            }
+
+            //so that the convodisplay updates
           });
 
         /*.then(async snapshot => {

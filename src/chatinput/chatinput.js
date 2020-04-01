@@ -23,6 +23,7 @@ class ChatInputComponent extends React.Component {
           className={classes.chatTextBox}
           onChange={this.handleInputChange}
           value={this.state.message}
+          onKeyDown={this.onKeyDownHandler}
         ></TextField>
         <Button color="primary" variant="contained" onClick={this.sendMessage}>
           Send
@@ -31,6 +32,11 @@ class ChatInputComponent extends React.Component {
     );
   }
 
+  onKeyDownHandler = e => {
+    if (e.key === "Enter") {
+      this.sendMessage();
+    }
+  };
   sendMessage = async () => {
     this.props.sendMessage(this.state.message);
     await this.setState({ message: "" });
