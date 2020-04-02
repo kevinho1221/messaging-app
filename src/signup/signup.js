@@ -152,11 +152,14 @@ class SignupComponent extends React.Component {
 
   submitForm = e => {
     e.preventDefault();
-
-    if (this.state.password === this.state.passwordconf) {
-      this.addToFirebase();
+    if (this.state.firstname != "" && this.state.lastname != "") {
+      if (this.state.password === this.state.passwordconf) {
+        this.addToFirebase();
+      } else {
+        this.setState({ signuperror: "The passwords do not match!" });
+      }
     } else {
-      this.setState({ signuperror: "The passwords do not match!" });
+      this.setState({ signuperror: "Please enter your first and last name!" });
     }
   };
 
