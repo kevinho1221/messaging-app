@@ -20,7 +20,9 @@ class ChatSelectorComponent extends React.Component {
 
     return (
       <div className={classes.main}>
-        <ChatSelectorHeaderComponent></ChatSelectorHeaderComponent>
+        <ChatSelectorHeaderComponent
+          displayNewChatWindow={this.props.displayNewChatWindow}
+        ></ChatSelectorHeaderComponent>
         <div className={classes.list}>
           <List>
             {this.props.chats.map((chat, index) => {

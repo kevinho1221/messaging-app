@@ -16,6 +16,7 @@ class ChatSelectorHeaderComponent extends React.Component {
     return (
       <div className={classes.main}>
         <Autocomplete
+          clearOnEscape
           id="combo-box-demo"
           options={top100Films}
           getOptionLabel={option => option.title}
@@ -25,12 +26,19 @@ class ChatSelectorHeaderComponent extends React.Component {
             <TextField {...params} label="Search Friends" variant="outlined" />
           )}
         />
-        <IconButton className={classes.iconbuttonstyles}>
+        <IconButton
+          className={classes.iconbuttonstyles}
+          onClick={this.handleOnClick}
+        >
           <Create className={classes.createstyles} />
         </IconButton>
       </div>
     );
   }
+
+  handleOnClick = () => {
+    this.props.displayNewChatWindow();
+  };
 }
 
 export default withStyles(chatselectorheaderStyles)(

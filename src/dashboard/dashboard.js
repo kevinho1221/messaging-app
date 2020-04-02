@@ -4,6 +4,7 @@ import dashboardStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
 import ConvodisplayComponent from "../convodisplay/convodisplay";
 import ChatInputComponent from "../chatinput/chatinput";
+import NewChatComponent from "../newchat/newchat";
 
 const firebase = require("firebase");
 
@@ -12,10 +13,12 @@ class DashboardComponent extends React.Component {
     super();
     this.state = {
       email: "",
+      users: [],
       chats: [],
       selectedchatIndex: 0,
       selectedmessages: [],
-      hasSelectedOnce: false
+      hasSelectedOnce: false,
+      newChatWindow: false
     };
   }
 
@@ -35,18 +38,33 @@ class DashboardComponent extends React.Component {
           currentuser={this.state.email}
           setSelectedchatIndex={this.setSelectedchatIndex}
           setSelectedmessages={this.setSelectedmessages}
+          displayNewChatWindow={this.displayNewChatWindow}
         ></ChatSelectorComponent>
-        <ConvodisplayComponent
-          email={this.state.email}
-          selectedmessages={this.state.selectedmessages}
-        ></ConvodisplayComponent>
+        {this.state.newChatWindow ? (
+          <NewChatComponent
+            chats={this.state.chats}
+            users={this.state.users}
+            currentuser={this.state.email}
+          ></NewChatComponent>
+        ) : (
+          <ConvodisplayComponent
+            email={this.state.email}
+            selectedmessages={this.state.selectedmessages}
+          ></ConvodisplayComponent>
+        )}
+
         <ChatInputComponent
           sendMessage={this.sendMessage}
           hasSelectedOnce={this.state.hasSelectedOnce}
+          newChatWindow={this.state.newChatWindow}
         ></ChatInputComponent>
       </div>
     );
   }
+
+  displayNewChatWindow = async () => {
+    await this.setState({ newChatWindow: true });
+  };
 
   sendMessage = message => {
     if (message.replace(/\s/g, "").length) {
@@ -77,8 +95,12 @@ class DashboardComponent extends React.Component {
 
   setSelectedchatIndex = index => {
     this.setState({ selectedchatIndex: index });
+
+    //After the first selection, the chat input box should appear and stay there
     this.setState({ hasSelectedOnce: true });
-    console.log(this.state.selectedchatIndex);
+
+    this.setState({ newChatWindow: false });
+    //console.log(this.state.selectedchatIndex);
     console.log(this.state.chats[this.state.selectedchatIndex].users);
   };
 
@@ -89,7 +111,7 @@ class DashboardComponent extends React.Component {
     console.log(this.state.chats[this.state.selectedchatIndex].messages);
   };
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
         this.setState({ email: user.email });
@@ -106,44 +128,16 @@ class DashboardComponent extends React.Component {
             if (this.state.hasSelectedOnce === true) {
               this.setSelectedmessages();
             }
-
-            //so that the convodisplay updates
           });
-
-        /*.then(async snapshot => {
-            //await this.setState({ chats: snapshot.docs});
-
-            console.log(snapshot.docs);
-            const thechats = snapshot.docs.map(doc => {
-              doc.data();
-            });
-            console.log(thechats);
-            //await this.setState({ chats: thechats });
-            //console.log(this.state.chats);
-
-            snapshot.forEach(async doc => {
-              console.log(doc.id);
-              console.log(doc.data().messages);
-              this.setState({ chats: doc.data() });
-              console.log(this.state.chats);
-            });
-          })
-          .catch(err => {
-            console.log("Error getting documents", err);
-          });*/
+        await firebase
+          .firestore()
+          .collection("users")
+          .onSnapshot(async docSnapshot => {
+            const theusers = docSnapshot.docs.map(doc => doc.data());
+            await this.setState({ users: theusers });
+          });
       }
     });
-
-    /*var chatQuery = chatRef
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          console.log(doc.id, "=>", doc.data());
-        });
-      })
-      .catch(err => {
-        console.log("Error getting documents", err);
-      });*/
   };
 }
 
