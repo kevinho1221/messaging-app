@@ -4,11 +4,12 @@ const chatselectorheaderStyles = () => ({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    background: "pink"
+    background: "pink",
+    height: "60px"
   },
   autocompletestyles: {
-    width: "300px",
-    borderRadius: "15px"
+    width: "300px"
+    //borderRadius: "15px"
   },
   iconcontainer: {
     width: "40px",
@@ -27,6 +28,10 @@ const chatselectorheaderStyles = () => ({
   },
   createstyles: {
     fontSize: "30px"
+  },
+  iconbuttonstyles: {
+    width: "70px",
+    borderRadius: "10px"
   }
 });
 

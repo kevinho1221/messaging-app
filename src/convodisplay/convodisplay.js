@@ -13,7 +13,7 @@ class convodisplayComponent extends React.Component {
         </div>
 
         <div className={classes.messages} id="convodisplay">
-          {this.props.selectedmessages.reverse().map((messages, index) => {
+          {[...this.props.selectedmessages].reverse().map((messages, index) => {
             if (messages.sender === this.props.email) {
               return (
                 <div className={classes.messagesUser} key={index}>

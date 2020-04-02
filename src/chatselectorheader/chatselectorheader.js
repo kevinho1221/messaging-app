@@ -20,12 +20,13 @@ class ChatSelectorHeaderComponent extends React.Component {
           options={top100Films}
           getOptionLabel={option => option.title}
           className={classes.autocompletestyles}
+          edge="start"
           renderInput={params => (
             <TextField {...params} label="Search Friends" variant="outlined" />
           )}
         />
-        <IconButton>
-          <Create />
+        <IconButton className={classes.iconbuttonstyles}>
+          <Create className={classes.createstyles} />
         </IconButton>
       </div>
     );

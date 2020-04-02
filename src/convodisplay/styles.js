@@ -1,7 +1,8 @@
 const convodisplayStyles = () => ({
   convoheader: {
     width: "70vw",
-    height: "50px",
+    height: "80px",
+    //height: "50px"
     marginLeft: "30%",
     background: "violet",
     padding: "20px",
@@ -16,9 +17,11 @@ const convodisplayStyles = () => ({
     width: "70vw",
     marginLeft: "30%",
     position: "absolute",
-    top: "50px",
+    //top: "50px",
+    top: "80px",
     overflow: "auto",
-    height: "calc(100vh - 100px)",
+    //height: "calc(100vh - 100px)",
+    height: "calc(100vh - 130px)",
     background: "yellow",
     //overflowY: "scroll",
     boxSizing: "border-box",
