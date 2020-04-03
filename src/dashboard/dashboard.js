@@ -18,7 +18,8 @@ class DashboardComponent extends React.Component {
       selectedchatIndex: 0,
       selectedmessages: [],
       hasSelectedOnce: false,
-      newChatWindow: false
+      newChatWindow: false,
+      newRecipient: ""
     };
     //ref so that dashboard can access chatselector methods
     this.chatSelectorComponent = React.createRef();
@@ -59,6 +60,7 @@ class DashboardComponent extends React.Component {
           changeSelectedIndexofChatSelector={
             this.changeSelectedIndexofChatSelector
           }
+          setNewRecipient={this.setNewRecipient}
         ></ConvodisplayComponent>
 
         <ChatInputComponent
@@ -69,6 +71,10 @@ class DashboardComponent extends React.Component {
       </div>
     );
   }
+
+  setNewRecipient = async recipient => {
+    await this.setState({ newRecipient: recipient });
+  };
 
   //To change highlighted selection in the chatselector after a
   //existing chat is selected from the new chat autocomplete box
@@ -83,7 +89,38 @@ class DashboardComponent extends React.Component {
   sendMessage = async message => {
     if (this.state.newChatWindow == true) {
       console.log("newchatwindow");
-      //check if existing
+      console.log(this.state.newRecipient);
+      if (await this.validRecipient()) {
+        if (message.replace(/\s/g, "").length) {
+          const newRecipientDocName = this.buildNewRecipientDocName();
+          await firebase
+            .firestore()
+            .collection("chats")
+            .doc(newRecipientDocName)
+            .set({
+              messages: [
+                {
+                  message: message,
+                  sender: this.state.email
+                }
+              ],
+              users: [this.state.email, this.state.newRecipient]
+            });
+          //sets which chat selection is highlighted
+          this.changeSelectedIndexofChatSelector(
+            this.findIndexOfRecipient(this.state.newRecipient)
+          );
+          await this.setState({ newChatWindow: false });
+          //sets the proper conversation
+          this.setSelectedchatIndex(
+            this.findIndexOfRecipient(this.state.newRecipient)
+          );
+          this.setSelectedmessages();
+          console.log(this.findIndexOfRecipient(this.state.newRecipient));
+        }
+      } else {
+        console.log("NOT A VALID EMAIL");
+      }
     } else {
       if (message.replace(/\s/g, "").length) {
         const docName = this.getDocName();
@@ -101,6 +138,34 @@ class DashboardComponent extends React.Component {
           .then(console.log("Message Sent"));
       }
     }
+  };
+
+  findIndexOfRecipient = recipient => {
+    const chatList = this.state.chats.map(
+      chat => chat.users.filter(email => email != this.state.email)[0]
+    );
+    const selectIndex = chatList.indexOf(recipient);
+    return selectIndex;
+  };
+
+  buildNewRecipientDocName = () => {
+    const newRecipientDocName = [this.state.email, this.state.newRecipient]
+      .sort()
+      .join(":");
+    return newRecipientDocName;
+  };
+
+  validRecipient = async () => {
+    //Checking if the user is a valid user
+    const getUsers = await firebase
+      .firestore()
+      .collection("users")
+      .get();
+    const users = getUsers.docs.map(doc => doc.data().email);
+    var valid = users.includes(this.state.newRecipient);
+    console.log(valid);
+
+    return valid;
   };
 
   getDocName = () => {
@@ -132,7 +197,7 @@ class DashboardComponent extends React.Component {
     this.setState({
       selectedmessages: this.state.chats[this.state.selectedchatIndex].messages
     });
-    console.log(this.state.chats[this.state.selectedchatIndex].messages);
+    //console.log(this.state.chats[this.state.selectedchatIndex].messages);
   };
 
   componentWillMount = () => {

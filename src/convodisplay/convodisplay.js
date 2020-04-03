@@ -28,6 +28,7 @@ class convodisplayComponent extends React.Component {
               changeSelectedIndexofChatSelector={
                 this.props.changeSelectedIndexofChatSelector
               }
+              setNewRecipient={this.props.setNewRecipient}
             ></NewChatComponent>
 
             {this.state.knownRecipient ? (

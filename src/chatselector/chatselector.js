@@ -11,6 +11,7 @@ class ChatSelectorComponent extends React.Component {
     super();
     this.state = {
       email: "",
+      //for which item is highlighted
       selectedIndex: null
     };
   }

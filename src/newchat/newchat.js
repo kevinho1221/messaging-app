@@ -74,18 +74,17 @@ class NewChatComponent extends React.Component {
   }
 
   handleClose = async (event, value, reason) => {
-    if (reason == "select-option") {
+    //Runs this if user clicks stats typing and clicks off of the autocomplete box
+    if (reason == "blur") {
       console.log(reason);
       //console.log(value);
       var autocompleteValue = document.getElementById("friends-list");
       var thevalue = autocompleteValue.getAttribute("value");
+      await this.setState({ recipient: thevalue });
+      this.props.setNewRecipient(this.state.recipient);
 
       console.log(thevalue);
-    } else {
-      console.log("other");
-      var autocompleteValue = document.getElementById("friends-list");
-      var thevalue = autocompleteValue.getAttribute("value");
-      console.log(thevalue);
+      console.log(this.state.recipient);
     }
   };
 
@@ -113,6 +112,7 @@ class NewChatComponent extends React.Component {
         //needs to decide what to do if ricipient is new
         this.props.setKnownRecipient(false);
         await this.setState({ recipient: value });
+        this.props.setNewRecipient(this.state.recipient);
 
         console.log(reason);
         console.log(value);
@@ -121,17 +121,9 @@ class NewChatComponent extends React.Component {
     }
   };
 
-  setRecipient = async () => {
-    var autocompleteValue = document.getElementById("friends-list");
-    var thevalue = autocompleteValue.value;
-    //await this.setState({ recipient: value.email });
-
-    //console.log(this.state.recipient);
-    console.log(thevalue);
-  };
-
   componentDidMount = () => {
     this.props.setKnownRecipient(false);
+    this.props.changeSelectedIndexofChatSelector(null);
   };
 
   /*
