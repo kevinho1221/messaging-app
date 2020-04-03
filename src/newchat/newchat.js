@@ -79,6 +79,7 @@ class NewChatComponent extends React.Component {
       //console.log(value);
       var autocompleteValue = document.getElementById("friends-list");
       var thevalue = autocompleteValue.getAttribute("value");
+
       console.log(thevalue);
     } else {
       console.log("other");
@@ -100,6 +101,7 @@ class NewChatComponent extends React.Component {
         const selectIndex = chatList.indexOf(this.state.recipient);
         this.props.setSelectedchatIndex(selectIndex);
         this.props.setSelectedmessages();
+        this.props.changeSelectedIndexofChatSelector(selectIndex);
 
         console.log(reason);
         console.log(value);
@@ -108,6 +110,7 @@ class NewChatComponent extends React.Component {
 
         //this.setRecipient();
       } else {
+        //needs to decide what to do if ricipient is new
         this.props.setKnownRecipient(false);
         await this.setState({ recipient: value });
 
@@ -125,6 +128,10 @@ class NewChatComponent extends React.Component {
 
     //console.log(this.state.recipient);
     console.log(thevalue);
+  };
+
+  componentDidMount = () => {
+    this.props.setKnownRecipient(false);
   };
 
   /*

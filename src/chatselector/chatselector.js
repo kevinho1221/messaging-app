@@ -60,6 +60,10 @@ class ChatSelectorComponent extends React.Component {
     await this.props.setSelectedchatIndex(index);
     await this.props.setSelectedmessages();
   };
+
+  setSelectedIndex = async index => {
+    await this.setState({ selectedIndex: index });
+  };
 }
 
 export default withStyles(chatselectorStyles)(ChatSelectorComponent);

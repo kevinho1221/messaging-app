@@ -20,6 +20,8 @@ class DashboardComponent extends React.Component {
       hasSelectedOnce: false,
       newChatWindow: false
     };
+    //ref so that dashboard can access chatselector methods
+    this.chatSelectorComponent = React.createRef();
   }
 
   render() {
@@ -40,6 +42,8 @@ class DashboardComponent extends React.Component {
           setSelectedmessages={this.setSelectedmessages}
           displayNewChatWindow={this.displayNewChatWindow}
           setHasSelectedOnce={this.setHasSelectedOnce}
+          //creating ref so that dashboard can access the selectedindex state
+          ref={this.chatSelectorComponent}
         ></ChatSelectorComponent>
 
         <ConvodisplayComponent
@@ -52,6 +56,9 @@ class DashboardComponent extends React.Component {
           newChatWindow={this.state.newChatWindow}
           setSelectedchatIndex={this.setSelectedchatIndex}
           setSelectedmessages={this.setSelectedmessages}
+          changeSelectedIndexofChatSelector={
+            this.changeSelectedIndexofChatSelector
+          }
         ></ConvodisplayComponent>
 
         <ChatInputComponent
@@ -62,6 +69,12 @@ class DashboardComponent extends React.Component {
       </div>
     );
   }
+
+  //To change highlighted selection in the chatselector after a
+  //existing chat is selected from the new chat autocomplete box
+  changeSelectedIndexofChatSelector = index => {
+    this.chatSelectorComponent.current.setSelectedIndex(index);
+  };
 
   displayNewChatWindow = async () => {
     await this.setState({ newChatWindow: true });

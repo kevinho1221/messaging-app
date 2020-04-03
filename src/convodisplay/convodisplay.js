@@ -25,26 +25,34 @@ class convodisplayComponent extends React.Component {
               setKnownRecipient={this.setKnownRecipient}
               setSelectedchatIndex={this.props.setSelectedchatIndex}
               setSelectedmessages={this.props.setSelectedmessages}
+              changeSelectedIndexofChatSelector={
+                this.props.changeSelectedIndexofChatSelector
+              }
             ></NewChatComponent>
-            <div className={classes.messages} id="convodisplay">
-              {[...this.props.selectedmessages]
-                .reverse()
-                .map((messages, index) => {
-                  if (messages.sender === this.props.email) {
-                    return (
-                      <div className={classes.messagesUser} key={index}>
-                        {messages.message}
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div className={classes.messagesOther} key={index}>
-                        {messages.message}
-                      </div>
-                    );
-                  }
-                })}
-            </div>
+
+            {this.state.knownRecipient ? (
+              <div className={classes.messages} id="convodisplay">
+                {[...this.props.selectedmessages]
+                  .reverse()
+                  .map((messages, index) => {
+                    if (messages.sender === this.props.email) {
+                      return (
+                        <div className={classes.messagesUser} key={index}>
+                          {messages.message}
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div className={classes.messagesOther} key={index}>
+                          {messages.message}
+                        </div>
+                      );
+                    }
+                  })}
+              </div>
+            ) : (
+              <div className={classes.messages}></div>
+            )}
           </div>
         ) : (
           <div>
