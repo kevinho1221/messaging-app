@@ -14,10 +14,10 @@ class NewChatComponent extends React.Component {
 
   render() {
     const { classes } = this.props;
-    /*const friends = [
+    const friends = [
       { email: "kevinho@test.com", firstname: "Lisa", lastname: "Nho" },
       { email: "mike@test.com", firstname: "Michael", lastname: "Yang" }
-    ];*/
+    ];
 
     const chatList = this.props.chats.map(
       chat => chat.users.filter(email => email != this.props.currentuser)[0]
@@ -33,30 +33,97 @@ class NewChatComponent extends React.Component {
       <div>
         <div className={classes.convoheader}>
           <Autocomplete
-            clearOnEscape
             id="friends-list"
+            freeSolo
+            clearOnEscape
             options={friendsList}
-            getOptionLabel={option =>
-              [option.firstname, option.lastname].join(" ")
-            }
+            /*getOptionLabel={option =>
+              option.firstname
+                ? [option.firstname, option.lastname].join(" ")
+                : option
+            }*/
+            getOptionLabel={option => {
+              if (option.firstname) {
+                return [option.firstname, option.lastname].join(" ");
+              } else {
+                return option;
+              }
+            }}
+            /*options={friendsList.map(friend =>
+              [friend.firstname, friend.lastname].join(" ")
+            )}*/
             className={classes.autocompletestyles}
             edge="start"
-            onChange={(event, value) => this.setRecipient(value)}
+            //onKeyDown={this.onKeyDownHandler}
+            /*this onChange causes custom input to disappear after pressing enter, 
+            it was because state was being changed*/
+            onChange={(event, value, reason) =>
+              this.onChangeHandler(event, value, reason)
+            }
+            onClose={(event, reason) => {
+              //const recipient = this.state.recipient;
+              this.handleClose(event, this.state.recipient, reason);
+            }}
             renderInput={params => (
               <TextField {...params} label="To:" variant="outlined" />
             )}
           />
         </div>
-
-        <div className={classes.messages} id="convodisplay"></div>
       </div>
     );
   }
 
-  setRecipient = async value => {
-    await this.setState({ recipient: value.email });
-    console.log(this.state.recipient);
+  handleClose = async (event, value, reason) => {
+    if (reason == "select-option") {
+      console.log(reason);
+      console.log(value);
+    } else {
+      console.log("other");
+      console.log(value);
+    }
   };
+
+  onChangeHandler = async (event, value, reason) => {
+    if (value) {
+      if (reason == "select-option") {
+        this.props.setKnownRecipient(true);
+        await this.setState({ recipient: value.email });
+
+        console.log(reason);
+        console.log(value);
+        console.log(this.state.recipient);
+
+        //this.setRecipient();
+      } else {
+        this.props.setKnownRecipient(false);
+        await this.setState({ recipient: value });
+
+        console.log(reason);
+        console.log(value);
+        console.log(this.state.recipient);
+      }
+    }
+  };
+
+  setRecipient = async () => {
+    var autocompleteValue = document.getElementById("friends-list");
+    var thevalue = autocompleteValue.value;
+    //await this.setState({ recipient: value.email });
+
+    //console.log(this.state.recipient);
+    console.log(thevalue);
+  };
+
+  /*
+  setRecipient = async (event, value) => {
+    if (value) {
+      await this.setState({ recipient: value.email });
+      const autocompleteValue = document.getElementById("friends-list");
+      autocompleteValue.value = [value.firstname, value.lastname].join(" ");
+      //console.log(this.state.recipient);
+      console.log(value);
+    }
+  };*/
 }
 
 export default withStyles(newchatStyles)(NewChatComponent);

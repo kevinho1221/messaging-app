@@ -22,6 +22,7 @@ class ChatSelectorComponent extends React.Component {
       <div className={classes.main}>
         <ChatSelectorHeaderComponent
           displayNewChatWindow={this.props.displayNewChatWindow}
+          setHasSelectedOnce={this.props.setHasSelectedOnce}
         ></ChatSelectorHeaderComponent>
         <div className={classes.list}>
           <List>

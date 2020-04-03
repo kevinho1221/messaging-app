@@ -39,19 +39,20 @@ class DashboardComponent extends React.Component {
           setSelectedchatIndex={this.setSelectedchatIndex}
           setSelectedmessages={this.setSelectedmessages}
           displayNewChatWindow={this.displayNewChatWindow}
+          setHasSelectedOnce={this.setHasSelectedOnce}
         ></ChatSelectorComponent>
-        {this.state.newChatWindow ? (
-          <NewChatComponent
-            chats={this.state.chats}
-            users={this.state.users}
-            currentuser={this.state.email}
-          ></NewChatComponent>
-        ) : (
-          <ConvodisplayComponent
-            email={this.state.email}
-            selectedmessages={this.state.selectedmessages}
-          ></ConvodisplayComponent>
-        )}
+
+        <ConvodisplayComponent
+          email={this.state.email}
+          selectedmessages={this.state.selectedmessages}
+          //for newchatComponent
+          chats={this.state.chats}
+          users={this.state.users}
+          currentuser={this.state.email}
+          newChatWindow={this.state.newChatWindow}
+          setSelectedchatIndex={this.setSelectedchatIndex}
+          setSelectedmessages={this.setSelectedmessages}
+        ></ConvodisplayComponent>
 
         <ChatInputComponent
           sendMessage={this.sendMessage}
@@ -66,21 +67,26 @@ class DashboardComponent extends React.Component {
     await this.setState({ newChatWindow: true });
   };
 
-  sendMessage = message => {
-    if (message.replace(/\s/g, "").length) {
-      const docName = this.getDocName();
-      firebase
-        .firestore()
-        .collection("chats")
-        .doc(docName)
-        .update({
-          messages: firebase.firestore.FieldValue.arrayUnion({
-            message: message,
-            sender: this.state.email,
-            timestamp: Date.now()
+  sendMessage = async message => {
+    if (this.state.newChatWindow == true) {
+      console.log("newchatwindow");
+      //check if existing
+    } else {
+      if (message.replace(/\s/g, "").length) {
+        const docName = this.getDocName();
+        firebase
+          .firestore()
+          .collection("chats")
+          .doc(docName)
+          .update({
+            messages: firebase.firestore.FieldValue.arrayUnion({
+              message: message,
+              sender: this.state.email,
+              timestamp: Date.now()
+            })
           })
-        })
-        .then(console.log("Message Sent"));
+          .then(console.log("Message Sent"));
+      }
     }
   };
 
@@ -93,11 +99,16 @@ class DashboardComponent extends React.Component {
     return docName;
   };
 
+  setHasSelectedOnce = async () => {
+    //After the first selection, the chat input box should appear and stay there
+    await this.setState({ hasSelectedOnce: true });
+  };
+
   setSelectedchatIndex = index => {
     this.setState({ selectedchatIndex: index });
 
     //After the first selection, the chat input box should appear and stay there
-    this.setState({ hasSelectedOnce: true });
+    this.setHasSelectedOnce();
 
     this.setState({ newChatWindow: false });
     //console.log(this.state.selectedchatIndex);

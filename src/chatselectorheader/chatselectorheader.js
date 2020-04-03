@@ -38,6 +38,7 @@ class ChatSelectorHeaderComponent extends React.Component {
 
   handleOnClick = () => {
     this.props.displayNewChatWindow();
+    this.props.setHasSelectedOnce();
   };
 }
 

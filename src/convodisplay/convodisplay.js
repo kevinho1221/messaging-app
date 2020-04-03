@@ -1,37 +1,85 @@
 import React from "react";
 import convodisplayStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
+import NewChatComponent from "../newchat/newchat";
 
 class convodisplayComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      knownRecipient: false
+    };
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
       <div>
-        <div className={classes.convoheader} align="center">
-          Conversation Header
-        </div>
-
-        <div className={classes.messages} id="convodisplay">
-          {[...this.props.selectedmessages].reverse().map((messages, index) => {
-            if (messages.sender === this.props.email) {
-              return (
-                <div className={classes.messagesUser} key={index}>
-                  {messages.message}
-                </div>
-              );
-            } else {
-              return (
-                <div className={classes.messagesOther} key={index}>
-                  {messages.message}
-                </div>
-              );
-            }
-          })}
-        </div>
+        {this.props.newChatWindow ? (
+          <div>
+            <NewChatComponent
+              chats={this.props.chats}
+              users={this.props.users}
+              currentuser={this.props.currentuser}
+              setKnownRecipient={this.setKnownRecipient}
+              setSelectedchatIndex={this.props.setSelectedchatIndex}
+              setSelectedmessages={this.props.setSelectedmessages}
+            ></NewChatComponent>
+            <div className={classes.messages} id="convodisplay">
+              {[...this.props.selectedmessages]
+                .reverse()
+                .map((messages, index) => {
+                  if (messages.sender === this.props.email) {
+                    return (
+                      <div className={classes.messagesUser} key={index}>
+                        {messages.message}
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div className={classes.messagesOther} key={index}>
+                        {messages.message}
+                      </div>
+                    );
+                  }
+                })}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className={classes.convoheader} align="center">
+              Conversation Header
+            </div>
+            <div className={classes.messages} id="convodisplay">
+              {[...this.props.selectedmessages]
+                .reverse()
+                .map((messages, index) => {
+                  if (messages.sender === this.props.email) {
+                    return (
+                      <div className={classes.messagesUser} key={index}>
+                        {messages.message}
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div className={classes.messagesOther} key={index}>
+                        {messages.message}
+                      </div>
+                    );
+                  }
+                })}
+            </div>
+          </div>
+        )}
       </div>
     );
   }
+
+  setKnownRecipient = async known => {
+    await this.setState({ knownRecipient: known });
+    //console.log(this.state.knownRecipient);
+  };
 
   componentDidMount = () => {
     const container = document.getElementById("convodisplay");
