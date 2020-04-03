@@ -14,10 +14,6 @@ class NewChatComponent extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const friends = [
-      { email: "kevinho@test.com", firstname: "Lisa", lastname: "Nho" },
-      { email: "mike@test.com", firstname: "Michael", lastname: "Yang" }
-    ];
 
     const chatList = this.props.chats.map(
       chat => chat.users.filter(email => email != this.props.currentuser)[0]
@@ -37,11 +33,6 @@ class NewChatComponent extends React.Component {
             freeSolo
             clearOnEscape
             options={friendsList}
-            /*getOptionLabel={option =>
-              option.firstname
-                ? [option.firstname, option.lastname].join(" ")
-                : option
-            }*/
             getOptionLabel={option => {
               if (option.firstname) {
                 return [option.firstname, option.lastname].join(" ");
@@ -49,14 +40,8 @@ class NewChatComponent extends React.Component {
                 return option;
               }
             }}
-            /*options={friendsList.map(friend =>
-              [friend.firstname, friend.lastname].join(" ")
-            )}*/
             className={classes.autocompletestyles}
             edge="start"
-            //onKeyDown={this.onKeyDownHandler}
-            /*this onChange causes custom input to disappear after pressing enter, 
-            it was because state was being changed*/
             onChange={(event, value, reason) =>
               this.onChangeHandler(event, value, reason)
             }
@@ -125,17 +110,6 @@ class NewChatComponent extends React.Component {
     this.props.setKnownRecipient(false);
     this.props.changeSelectedIndexofChatSelector(null);
   };
-
-  /*
-  setRecipient = async (event, value) => {
-    if (value) {
-      await this.setState({ recipient: value.email });
-      const autocompleteValue = document.getElementById("friends-list");
-      autocompleteValue.value = [value.firstname, value.lastname].join(" ");
-      //console.log(this.state.recipient);
-      console.log(value);
-    }
-  };*/
 }
 
 export default withStyles(newchatStyles)(NewChatComponent);

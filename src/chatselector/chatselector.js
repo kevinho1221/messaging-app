@@ -41,9 +41,11 @@ class ChatSelectorComponent extends React.Component {
                     }}
                   >
                     <ListItemText
-                      primary={chat.users.filter(
+                      /*primary={chat.users.filter(
                         user => user !== this.props.currentuser
-                      )}
+                      )}*/
+
+                      primary={this.setFullName(chat)}
                     ></ListItemText>
                   </ListItem>
                 </div>
@@ -54,6 +56,21 @@ class ChatSelectorComponent extends React.Component {
       </div>
     );
   }
+
+  setFullName = chat => {
+    const otherUser = chat.users.filter(
+      user => user !== this.props.currentuser
+    );
+
+    const filteredOtherUser = this.props.users.filter(user =>
+      otherUser.includes(user.email)
+    );
+
+    return filteredOtherUser.map(user =>
+      [user.firstname, user.lastname].join(" ")
+    );
+  };
+
   handleListItemClick = async index => {
     //set selected index so that selected chat stays highlighted
     await this.setState({ selectedIndex: index });

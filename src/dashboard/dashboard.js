@@ -43,6 +43,7 @@ class DashboardComponent extends React.Component {
           setSelectedmessages={this.setSelectedmessages}
           displayNewChatWindow={this.displayNewChatWindow}
           setHasSelectedOnce={this.setHasSelectedOnce}
+          users={this.state.users}
           //creating ref so that dashboard can access the selectedindex state
           ref={this.chatSelectorComponent}
         ></ChatSelectorComponent>
