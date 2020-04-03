@@ -76,10 +76,15 @@ class NewChatComponent extends React.Component {
   handleClose = async (event, value, reason) => {
     if (reason == "select-option") {
       console.log(reason);
-      console.log(value);
+      //console.log(value);
+      var autocompleteValue = document.getElementById("friends-list");
+      var thevalue = autocompleteValue.getAttribute("value");
+      console.log(thevalue);
     } else {
       console.log("other");
-      console.log(value);
+      var autocompleteValue = document.getElementById("friends-list");
+      var thevalue = autocompleteValue.getAttribute("value");
+      console.log(thevalue);
     }
   };
 
@@ -89,9 +94,17 @@ class NewChatComponent extends React.Component {
         this.props.setKnownRecipient(true);
         await this.setState({ recipient: value.email });
 
+        const chatList = this.props.chats.map(
+          chat => chat.users.filter(email => email != this.props.currentuser)[0]
+        );
+        const selectIndex = chatList.indexOf(this.state.recipient);
+        this.props.setSelectedchatIndex(selectIndex);
+        this.props.setSelectedmessages();
+
         console.log(reason);
         console.log(value);
         console.log(this.state.recipient);
+        console.log(selectIndex);
 
         //this.setRecipient();
       } else {
