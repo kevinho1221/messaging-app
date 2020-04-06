@@ -5,13 +5,14 @@ const chatselectorheaderStyles = () => ({
     justifyContent: "space-around",
     alignItems: "center",
     background: "pink",
-    height: "60px"
+    height: "60px",
   },
   autocompletestyles: {
-    width: "300px"
+    width: "300px",
+    padding: "20px",
     //borderRadius: "15px"
   },
-  iconcontainer: {
+  /*iconcontainer: {
     width: "40px",
     height: "40px",
     background: "lightgreen",
@@ -19,24 +20,25 @@ const chatselectorheaderStyles = () => ({
     alignItems: "center",
     justifyContent: "space-around",
     "&:hover": {
-      cursor: "pointer"
+      cursor: "pointer",
     },
     "&:focus": {
       outline: "0",
-      borderColor: "#45a29e"
-    }
-  },
+      borderColor: "#45a29e",
+    },
+  },*/
   createstyles: {
-    fontSize: "30px"
+    fontSize: "30px",
   },
   iconbuttonstyles: {
     width: "70px",
     borderRadius: "10px",
     background: "red",
     "&:hover": {
-      background: "green"
-    }
-  }
+      background: "green",
+    },
+    margin: "10px",
+  },
 });
 
 export default chatselectorheaderStyles;

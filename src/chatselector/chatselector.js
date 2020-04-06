@@ -25,6 +25,16 @@ class ChatSelectorComponent extends React.Component {
         <ChatSelectorHeaderComponent
           displayNewChatWindow={this.props.displayNewChatWindow}
           setHasSelectedOnce={this.props.setHasSelectedOnce}
+          chats={this.props.chats}
+          users={this.props.users}
+          currentuser={this.props.currentuser}
+          setSelectedchatIndex={this.props.setSelectedchatIndex}
+          setSelectedmessages={this.props.setSelectedmessages}
+          changeSelectedIndexofChatSelector={
+            this.props.changeSelectedIndexofChatSelector
+          }
+          setSelectedFirstName={this.props.setSelectedFirstName}
+          setSelectedLastName={this.props.setSelectedLastName}
         ></ChatSelectorHeaderComponent>
         <div className={classes.list}>
           <List>

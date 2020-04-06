@@ -37,6 +37,9 @@ class DashboardComponent extends React.Component {
           currentuser={this.state.email}
           setSelectedchatIndex={this.setSelectedchatIndex}
           setSelectedmessages={this.setSelectedmessages}
+          changeSelectedIndexofChatSelector={
+            this.changeSelectedIndexofChatSelector
+          }
           displayNewChatWindow={this.displayNewChatWindow}
           setHasSelectedOnce={this.setHasSelectedOnce}
           users={this.state.users}
