@@ -7,7 +7,7 @@ class convodisplayComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      knownRecipient: false
+      knownRecipient: false,
     };
   }
 
@@ -29,6 +29,8 @@ class convodisplayComponent extends React.Component {
                 this.props.changeSelectedIndexofChatSelector
               }
               setNewRecipient={this.props.setNewRecipient}
+              setSelectedFirstName={this.props.setSelectedFirstName}
+              setSelectedLastName={this.props.setSelectedLastName}
             ></NewChatComponent>
 
             {this.state.knownRecipient ? (
@@ -58,7 +60,7 @@ class convodisplayComponent extends React.Component {
         ) : (
           <div>
             <div className={classes.convoheader} align="center">
-              Conversation Header
+              {this.props.selectedFirstName + " " + this.props.selectedLastName}
             </div>
             <div className={classes.messages} id="convodisplay">
               {[...this.props.selectedmessages]
@@ -85,7 +87,7 @@ class convodisplayComponent extends React.Component {
     );
   }
 
-  setKnownRecipient = async known => {
+  setKnownRecipient = async (known) => {
     await this.setState({ knownRecipient: known });
     //console.log(this.state.knownRecipient);
   };

@@ -8,7 +8,7 @@ const convodisplayStyles = () => ({
     padding: "20px",
     position: "fixed",
     zIndex: "1",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   },
   messages: {
     display: "flex",
@@ -26,7 +26,7 @@ const convodisplayStyles = () => ({
     //overflowY: "scroll",
     boxSizing: "border-box",
     //padding: "10px",
-    border: "10px yellow solid"
+    border: "10px yellow solid",
 
     //need to somehow get padding
     //maybe psudoelement?
@@ -42,7 +42,7 @@ const convodisplayStyles = () => ({
     marginLeft: "65%",
     wordWrap: "break-word",
     boxSizing: "border-box",
-    marginTop: "10px"
+    marginTop: "10px",
     //margin: "auto"
   },
   messagesOther: {
@@ -55,9 +55,9 @@ const convodisplayStyles = () => ({
     marginRight: "65%",
     wordWrap: "break-word",
     boxSizing: "border-box",
-    marginTop: "10px"
+    marginTop: "10px",
     //margin: "auto"
-  }
+  },
 });
 
 export default convodisplayStyles;

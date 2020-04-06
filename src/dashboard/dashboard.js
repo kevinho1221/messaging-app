@@ -19,7 +19,9 @@ class DashboardComponent extends React.Component {
       selectedmessages: [],
       hasSelectedOnce: false,
       newChatWindow: false,
-      newRecipient: ""
+      newRecipient: "",
+      selectedFirstName: "",
+      selectedLastName: "",
     };
     //ref so that dashboard can access chatselector methods
     this.chatSelectorComponent = React.createRef();
@@ -30,12 +32,6 @@ class DashboardComponent extends React.Component {
 
     return (
       <div className={classes.main}>
-        {
-          //CREATE A HEADING COMPONENT HERE}
-          //first add ability to send new messages and start new conversations
-          //then probably need to recreate all the users over again so that the have first and last names
-          //then use those to create the avatars
-        }
         <ChatSelectorComponent
           chats={this.state.chats}
           currentuser={this.state.email}
@@ -46,6 +42,9 @@ class DashboardComponent extends React.Component {
           users={this.state.users}
           //creating ref so that dashboard can access the selectedindex state
           ref={this.chatSelectorComponent}
+          //for the chat header of the convodisplay component
+          setSelectedFirstName={this.setSelectedFirstName}
+          setSelectedLastName={this.setSelectedLastName}
         ></ChatSelectorComponent>
 
         <ConvodisplayComponent
@@ -62,6 +61,10 @@ class DashboardComponent extends React.Component {
             this.changeSelectedIndexofChatSelector
           }
           setNewRecipient={this.setNewRecipient}
+          selectedFirstName={this.state.selectedFirstName}
+          selectedLastName={this.state.selectedLastName}
+          setSelectedFirstName={this.setSelectedFirstName}
+          setSelectedLastName={this.setSelectedLastName}
         ></ConvodisplayComponent>
 
         <ChatInputComponent
@@ -73,13 +76,23 @@ class DashboardComponent extends React.Component {
     );
   }
 
-  setNewRecipient = async recipient => {
+  setSelectedFirstName = async (firstname) => {
+    await this.setState({ selectedFirstName: firstname });
+    console.log(this.state.selectedFirstName);
+  };
+
+  setSelectedLastName = async (lastname) => {
+    await this.setState({ selectedLastName: lastname });
+    console.log(this.state.selectedLastName);
+  };
+
+  setNewRecipient = async (recipient) => {
     await this.setState({ newRecipient: recipient });
   };
 
   //To change highlighted selection in the chatselector after a
   //existing chat is selected from the new chat autocomplete box
-  changeSelectedIndexofChatSelector = index => {
+  changeSelectedIndexofChatSelector = (index) => {
     this.chatSelectorComponent.current.setSelectedIndex(index);
   };
 
@@ -87,7 +100,7 @@ class DashboardComponent extends React.Component {
     await this.setState({ newChatWindow: true });
   };
 
-  sendMessage = async message => {
+  sendMessage = async (message) => {
     if (this.state.newChatWindow == true) {
       console.log("newchatwindow");
       console.log(this.state.newRecipient);
@@ -102,10 +115,10 @@ class DashboardComponent extends React.Component {
               messages: [
                 {
                   message: message,
-                  sender: this.state.email
-                }
+                  sender: this.state.email,
+                },
               ],
-              users: [this.state.email, this.state.newRecipient]
+              users: [this.state.email, this.state.newRecipient],
             });
           //sets which chat selection is highlighted
           this.changeSelectedIndexofChatSelector(
@@ -133,17 +146,17 @@ class DashboardComponent extends React.Component {
             messages: firebase.firestore.FieldValue.arrayUnion({
               message: message,
               sender: this.state.email,
-              timestamp: Date.now()
-            })
+              timestamp: Date.now(),
+            }),
           })
           .then(console.log("Message Sent"));
       }
     }
   };
 
-  findIndexOfRecipient = recipient => {
+  findIndexOfRecipient = (recipient) => {
     const chatList = this.state.chats.map(
-      chat => chat.users.filter(email => email != this.state.email)[0]
+      (chat) => chat.users.filter((email) => email != this.state.email)[0]
     );
     const selectIndex = chatList.indexOf(recipient);
     return selectIndex;
@@ -158,11 +171,8 @@ class DashboardComponent extends React.Component {
 
   validRecipient = async () => {
     //Checking if the user is a valid user
-    const getUsers = await firebase
-      .firestore()
-      .collection("users")
-      .get();
-    const users = getUsers.docs.map(doc => doc.data().email);
+    const getUsers = await firebase.firestore().collection("users").get();
+    const users = getUsers.docs.map((doc) => doc.data().email);
     var valid = users.includes(this.state.newRecipient);
     console.log(valid);
 
@@ -172,7 +182,7 @@ class DashboardComponent extends React.Component {
   getDocName = () => {
     const selectedUser = this.state.chats[
       this.state.selectedchatIndex
-    ].users.filter(email => email != this.state.email);
+    ].users.filter((email) => email != this.state.email);
     const docName = [this.state.email, selectedUser].sort().join(":");
     //console.log(docName);
     return docName;
@@ -183,7 +193,7 @@ class DashboardComponent extends React.Component {
     await this.setState({ hasSelectedOnce: true });
   };
 
-  setSelectedchatIndex = index => {
+  setSelectedchatIndex = (index) => {
     this.setState({ selectedchatIndex: index });
 
     //After the first selection, the chat input box should appear and stay there
@@ -196,13 +206,13 @@ class DashboardComponent extends React.Component {
 
   setSelectedmessages = () => {
     this.setState({
-      selectedmessages: this.state.chats[this.state.selectedchatIndex].messages
+      selectedmessages: this.state.chats[this.state.selectedchatIndex].messages,
     });
     //console.log(this.state.chats[this.state.selectedchatIndex].messages);
   };
 
   componentWillMount = () => {
-    firebase.auth().onAuthStateChanged(async user => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         this.setState({ email: user.email });
         console.log(user.email);
@@ -210,8 +220,8 @@ class DashboardComponent extends React.Component {
           .firestore()
           .collection("chats")
           .where("users", "array-contains", user.email)
-          .onSnapshot(async docSnapshot => {
-            const thechats = docSnapshot.docs.map(doc => doc.data());
+          .onSnapshot(async (docSnapshot) => {
+            const thechats = docSnapshot.docs.map((doc) => doc.data());
             //console.log(thechats);
             await this.setState({ chats: thechats });
 
@@ -222,8 +232,8 @@ class DashboardComponent extends React.Component {
         await firebase
           .firestore()
           .collection("users")
-          .onSnapshot(async docSnapshot => {
-            const theusers = docSnapshot.docs.map(doc => doc.data());
+          .onSnapshot(async (docSnapshot) => {
+            const theusers = docSnapshot.docs.map((doc) => doc.data());
             await this.setState({ users: theusers });
           });
       }

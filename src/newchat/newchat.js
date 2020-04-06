@@ -8,7 +8,7 @@ class NewChatComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      recipient: ""
+      recipient: "",
     };
   }
 
@@ -16,14 +16,16 @@ class NewChatComponent extends React.Component {
     const { classes } = this.props;
 
     const chatList = this.props.chats.map(
-      chat => chat.users.filter(email => email != this.props.currentuser)[0]
+      (chat) => chat.users.filter((email) => email != this.props.currentuser)[0]
     );
 
     const userList = this.props.users;
-    const friendsList = userList.filter(user => chatList.includes(user.email));
-    console.log(chatList);
-    console.log(userList);
-    console.log(friendsList);
+    const friendsList = userList.filter((user) =>
+      chatList.includes(user.email)
+    );
+    //console.log(chatList);
+    //console.log(userList);
+    //console.log(friendsList);
 
     return (
       <div>
@@ -33,7 +35,7 @@ class NewChatComponent extends React.Component {
             freeSolo
             clearOnEscape
             options={friendsList}
-            getOptionLabel={option => {
+            getOptionLabel={(option) => {
               if (option.firstname) {
                 return [option.firstname, option.lastname].join(" ");
               } else {
@@ -49,7 +51,7 @@ class NewChatComponent extends React.Component {
               //const recipient = this.state.recipient;
               this.handleClose(event, this.state.recipient, reason);
             }}
-            renderInput={params => (
+            renderInput={(params) => (
               <TextField {...params} label="To:" variant="outlined" />
             )}
           />
@@ -80,12 +82,21 @@ class NewChatComponent extends React.Component {
         await this.setState({ recipient: value.email });
 
         const chatList = this.props.chats.map(
-          chat => chat.users.filter(email => email != this.props.currentuser)[0]
+          (chat) =>
+            chat.users.filter((email) => email != this.props.currentuser)[0]
         );
         const selectIndex = chatList.indexOf(this.state.recipient);
         this.props.setSelectedchatIndex(selectIndex);
         this.props.setSelectedmessages();
         this.props.changeSelectedIndexofChatSelector(selectIndex);
+
+        const userList = this.props.users;
+        const friendsList = userList.filter((user) =>
+          chatList.includes(user.email)
+        );
+
+        this.props.setSelectedFirstName(friendsList[selectIndex].firstname);
+        this.props.setSelectedLastName(friendsList[selectIndex].lastname);
 
         console.log(reason);
         console.log(value);

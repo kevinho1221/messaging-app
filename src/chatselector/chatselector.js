@@ -93,10 +93,25 @@ class ChatSelectorComponent extends React.Component {
 
     await this.props.setSelectedchatIndex(index);
     await this.props.setSelectedmessages();
+    await this.setSelectedFirstandLastName(index);
   };
 
   setSelectedIndex = async (index) => {
     await this.setState({ selectedIndex: index });
+  };
+
+  setSelectedFirstandLastName = async (index) => {
+    //Send the first and last name of the selection to the dashboard
+    const chatList = this.props.chats.map(
+      (chat) => chat.users.filter((email) => email != this.props.currentuser)[0]
+    );
+    const userList = this.props.users;
+    const friendsList = userList.filter((user) =>
+      chatList.includes(user.email)
+    );
+    console.log(friendsList);
+    await this.props.setSelectedFirstName(friendsList[index].firstname);
+    await this.props.setSelectedLastName(friendsList[index].lastname);
   };
 }
 
