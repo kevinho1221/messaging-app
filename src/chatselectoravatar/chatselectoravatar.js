@@ -1,9 +1,9 @@
 import React from "react";
-import avatarStyles from "./styles.js";
+import chatselectoravatarStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Avatar } from "@material-ui/core";
 
-class AvatarComponent extends React.Component {
+class ChatSelectorAvatarComponent extends React.Component {
   render() {
     const { classes } = this.props;
 
@@ -20,4 +20,6 @@ class AvatarComponent extends React.Component {
   }
 }
 
-export default withStyles(avatarStyles)(AvatarComponent);
+export default withStyles(chatselectoravatarStyles)(
+  ChatSelectorAvatarComponent
+);

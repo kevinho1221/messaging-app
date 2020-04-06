@@ -5,7 +5,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ChatSelectorHeaderComponent from "../chatselectorheader/chatselectorheader";
-import AvatarComponent from "../avatar/avatar";
+import ChatSelectorAvatarComponent from "../chatselectoravatar/chatselectoravatar";
 
 class ChatSelectorComponent extends React.Component {
   constructor() {
@@ -76,14 +76,14 @@ class ChatSelectorComponent extends React.Component {
     const lastinit = lastname.charAt(0);
 
     return (
-      <AvatarComponent
+      <ChatSelectorAvatarComponent
         /*fullname={filteredOtherUser.map((user) =>
           [user.firstname, user.lastname].join(" ")
         )}*/
         firstinit={firstinit}
         lastinit={lastinit}
         fullname={firstname + " " + lastname}
-      ></AvatarComponent>
+      ></ChatSelectorAvatarComponent>
     );
   };
 

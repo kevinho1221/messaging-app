@@ -2,6 +2,7 @@ import React from "react";
 import convodisplayStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
 import NewChatComponent from "../newchat/newchat";
+import ConvoDisplayHeaderComponent from "../convodisplayheader/convodisplayheader";
 
 class convodisplayComponent extends React.Component {
   constructor() {
@@ -59,8 +60,13 @@ class convodisplayComponent extends React.Component {
           </div>
         ) : (
           <div>
-            <div className={classes.convoheader} align="center">
-              {this.props.selectedFirstName + " " + this.props.selectedLastName}
+            <div align="center">
+              <ConvoDisplayHeaderComponent
+                className={classes.convoheader}
+                firstname={this.props.selectedFirstName}
+                lastname={this.props.selectedLastName}
+              ></ConvoDisplayHeaderComponent>
+              {/*this.props.selectedFirstName + " " + this.props.selectedLastName*/}
             </div>
             <div className={classes.messages} id="convodisplay">
               {[...this.props.selectedmessages]

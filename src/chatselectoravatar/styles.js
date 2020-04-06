@@ -1,4 +1,4 @@
-const avatarStyles = () => ({
+const chatselectoravatarStyles = () => ({
   main: {
     display: "flex",
     alignItems: "center",
@@ -15,4 +15,4 @@ const avatarStyles = () => ({
   },
 });
 
-export default avatarStyles;
+export default chatselectoravatarStyles;
