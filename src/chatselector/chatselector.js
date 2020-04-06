@@ -5,6 +5,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ChatSelectorHeaderComponent from "../chatselectorheader/chatselectorheader";
+import AvatarComponent from "../avatar/avatar";
 
 class ChatSelectorComponent extends React.Component {
   constructor() {
@@ -12,7 +13,7 @@ class ChatSelectorComponent extends React.Component {
     this.state = {
       email: "",
       //for which item is highlighted
-      selectedIndex: null
+      selectedIndex: null,
     };
   }
 
@@ -36,15 +37,11 @@ class ChatSelectorComponent extends React.Component {
                   <ListItem
                     button
                     selected={this.state.selectedIndex === index}
-                    onClick={e => {
+                    onClick={(e) => {
                       this.handleListItemClick(index);
                     }}
                   >
                     <ListItemText
-                      /*primary={chat.users.filter(
-                        user => user !== this.props.currentuser
-                      )}*/
-
                       primary={this.setFullName(chat)}
                     ></ListItemText>
                   </ListItem>
@@ -57,21 +54,40 @@ class ChatSelectorComponent extends React.Component {
     );
   }
 
-  setFullName = chat => {
+  setFullName = (chat) => {
     const otherUser = chat.users.filter(
-      user => user !== this.props.currentuser
+      (user) => user !== this.props.currentuser
     );
 
-    const filteredOtherUser = this.props.users.filter(user =>
+    const filteredOtherUser = this.props.users.filter((user) =>
       otherUser.includes(user.email)
     );
 
-    return filteredOtherUser.map(user =>
+    /*return filteredOtherUser.map((user) =>
       [user.firstname, user.lastname].join(" ")
+    );*/
+
+    const firstname = filteredOtherUser
+      .map((user) => user.firstname)
+      .toString();
+    const firstinit = firstname.charAt(0);
+
+    const lastname = filteredOtherUser.map((user) => user.lastname).toString();
+    const lastinit = lastname.charAt(0);
+
+    return (
+      <AvatarComponent
+        /*fullname={filteredOtherUser.map((user) =>
+          [user.firstname, user.lastname].join(" ")
+        )}*/
+        firstinit={firstinit}
+        lastinit={lastinit}
+        fullname={firstname + " " + lastname}
+      ></AvatarComponent>
     );
   };
 
-  handleListItemClick = async index => {
+  handleListItemClick = async (index) => {
     //set selected index so that selected chat stays highlighted
     await this.setState({ selectedIndex: index });
 
@@ -79,7 +95,7 @@ class ChatSelectorComponent extends React.Component {
     await this.props.setSelectedmessages();
   };
 
-  setSelectedIndex = async index => {
+  setSelectedIndex = async (index) => {
     await this.setState({ selectedIndex: index });
   };
 }
