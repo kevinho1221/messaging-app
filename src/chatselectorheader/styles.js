@@ -40,7 +40,8 @@ const chatselectorheaderStyles = () => ({
     "&:hover": {
       background: "green",
     },
-    margin: "10px",
+
+    marginRight: "20px",
   },
 });
 

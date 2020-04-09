@@ -3,6 +3,7 @@ import newchatStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import Button from "@material-ui/core/Button";
 
 class NewChatComponent extends React.Component {
   constructor() {
@@ -55,6 +56,16 @@ class NewChatComponent extends React.Component {
               <TextField {...params} label="To:" variant="outlined" />
             )}
           />
+          <div className={classes.buttoncontainer}>
+            <Button
+              color="primary"
+              variant="contained"
+              className={classes.button}
+              onClick={this.props.logout}
+            >
+              Log Out
+            </Button>
+          </div>
         </div>
       </div>
     );

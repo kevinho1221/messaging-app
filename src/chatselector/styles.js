@@ -19,7 +19,7 @@ const chatselectorStyles = () => ({
     overflow: "auto",
     //height: "100vh",
     height: "calc(100vh - 80px)",
-    backgroundImage: "linear-gradient(red, yellow)",
+    background: "#83a4d4",
     left: "0",
   },
 });

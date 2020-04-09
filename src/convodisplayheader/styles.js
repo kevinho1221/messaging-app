@@ -11,6 +11,12 @@ const convodisplayheaderStyles = () => ({
     boxSizing: "border-box",
     display: "flex",
     alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  avataruserWrapper: {
+    display: "flex",
+    alignItems: "center",
   },
   avatar: {
     padding: "20px",

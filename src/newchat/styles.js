@@ -10,7 +10,8 @@ const newchatStyles = () => ({
     zIndex: "1",
     boxSizing: "border-box",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   messages: {
     display: "flex",
@@ -28,7 +29,7 @@ const newchatStyles = () => ({
     //overflowY: "scroll",
     boxSizing: "border-box",
     //padding: "10px",
-    border: "10px yellow solid"
+    border: "10px yellow solid",
 
     //need to somehow get padding
     //maybe psudoelement?
@@ -44,7 +45,7 @@ const newchatStyles = () => ({
     marginLeft: "65%",
     wordWrap: "break-word",
     boxSizing: "border-box",
-    marginTop: "10px"
+    marginTop: "10px",
     //margin: "auto"
   },
   messagesOther: {
@@ -57,12 +58,22 @@ const newchatStyles = () => ({
     marginRight: "65%",
     wordWrap: "break-word",
     boxSizing: "border-box",
-    marginTop: "10px"
+    marginTop: "10px",
     //margin: "auto"
   },
   autocompletestyles: {
-    width: "600px"
-  }
+    width: "1000px",
+    float: "left",
+    marginleft: "-400px",
+  },
+  buttoncontainer: {
+    marginLeft: "50px",
+    marginRight: "0px",
+  },
+  button: {
+    height: "40px",
+    width: "100px",
+  },
 });
 
 export default newchatStyles;

@@ -30,55 +30,67 @@ class DashboardComponent extends React.Component {
   render() {
     const { classes } = this.props;
 
-    return (
-      <div className={classes.main}>
-        <ChatSelectorComponent
-          chats={this.state.chats}
-          currentuser={this.state.email}
-          setSelectedchatIndex={this.setSelectedchatIndex}
-          setSelectedmessages={this.setSelectedmessages}
-          changeSelectedIndexofChatSelector={
-            this.changeSelectedIndexofChatSelector
-          }
-          displayNewChatWindow={this.displayNewChatWindow}
-          setHasSelectedOnce={this.setHasSelectedOnce}
-          users={this.state.users}
-          //creating ref so that dashboard can access the selectedindex state
-          ref={this.chatSelectorComponent}
-          //for the chat header of the convodisplay component
-          setSelectedFirstName={this.setSelectedFirstName}
-          setSelectedLastName={this.setSelectedLastName}
-        ></ChatSelectorComponent>
+    if (this.state.email) {
+      return (
+        <div className={classes.main}>
+          <ChatSelectorComponent
+            chats={this.state.chats}
+            currentuser={this.state.email}
+            setSelectedchatIndex={this.setSelectedchatIndex}
+            setSelectedmessages={this.setSelectedmessages}
+            changeSelectedIndexofChatSelector={
+              this.changeSelectedIndexofChatSelector
+            }
+            displayNewChatWindow={this.displayNewChatWindow}
+            setHasSelectedOnce={this.setHasSelectedOnce}
+            users={this.state.users}
+            //creating ref so that dashboard can access the selectedindex state
+            ref={this.chatSelectorComponent}
+            //for the chat header of the convodisplay component
+            setSelectedFirstName={this.setSelectedFirstName}
+            setSelectedLastName={this.setSelectedLastName}
+          ></ChatSelectorComponent>
 
-        <ConvodisplayComponent
-          email={this.state.email}
-          selectedmessages={this.state.selectedmessages}
-          //for newchatComponent
-          chats={this.state.chats}
-          users={this.state.users}
-          currentuser={this.state.email}
-          newChatWindow={this.state.newChatWindow}
-          setSelectedchatIndex={this.setSelectedchatIndex}
-          setSelectedmessages={this.setSelectedmessages}
-          changeSelectedIndexofChatSelector={
-            this.changeSelectedIndexofChatSelector
-          }
-          setNewRecipient={this.setNewRecipient}
-          selectedFirstName={this.state.selectedFirstName}
-          selectedLastName={this.state.selectedLastName}
-          setSelectedFirstName={this.setSelectedFirstName}
-          setSelectedLastName={this.setSelectedLastName}
-          hasSelectedOnce={this.state.hasSelectedOnce}
-        ></ConvodisplayComponent>
+          <ConvodisplayComponent
+            email={this.state.email}
+            selectedmessages={this.state.selectedmessages}
+            //for newchatComponent
+            chats={this.state.chats}
+            users={this.state.users}
+            currentuser={this.state.email}
+            newChatWindow={this.state.newChatWindow}
+            setSelectedchatIndex={this.setSelectedchatIndex}
+            setSelectedmessages={this.setSelectedmessages}
+            changeSelectedIndexofChatSelector={
+              this.changeSelectedIndexofChatSelector
+            }
+            setNewRecipient={this.setNewRecipient}
+            selectedFirstName={this.state.selectedFirstName}
+            selectedLastName={this.state.selectedLastName}
+            setSelectedFirstName={this.setSelectedFirstName}
+            setSelectedLastName={this.setSelectedLastName}
+            hasSelectedOnce={this.state.hasSelectedOnce}
+            logout={this.logout}
+          ></ConvodisplayComponent>
 
-        <ChatInputComponent
-          sendMessage={this.sendMessage}
-          hasSelectedOnce={this.state.hasSelectedOnce}
-          newChatWindow={this.state.newChatWindow}
-        ></ChatInputComponent>
-      </div>
-    );
+          <ChatInputComponent
+            sendMessage={this.sendMessage}
+            hasSelectedOnce={this.state.hasSelectedOnce}
+            newChatWindow={this.state.newChatWindow}
+          ></ChatInputComponent>
+        </div>
+      );
+    } else {
+      //this.props.history.push("/login");
+      return <div></div>;
+    }
   }
+
+  logout = () => {
+    firebase.auth().signOut();
+    this.props.history.push("/login");
+    console.log("loggedout");
+  };
 
   setSelectedFirstName = async (firstname) => {
     await this.setState({ selectedFirstName: firstname });
