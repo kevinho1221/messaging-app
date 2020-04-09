@@ -6,6 +6,9 @@ const chatselectorheaderStyles = () => ({
     alignItems: "center",
     background: "pink",
     height: "60px",
+    position: "fixed",
+    width: "30%",
+    //marginTop: "-60px",
   },
   autocompletestyles: {
     width: "300px",

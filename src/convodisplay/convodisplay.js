@@ -65,6 +65,7 @@ class convodisplayComponent extends React.Component {
                 className={classes.convoheader}
                 firstname={this.props.selectedFirstName}
                 lastname={this.props.selectedLastName}
+                hasSelectedOnce={this.props.hasSelectedOnce}
               ></ConvoDisplayHeaderComponent>
               {/*this.props.selectedFirstName + " " + this.props.selectedLastName*/}
             </div>

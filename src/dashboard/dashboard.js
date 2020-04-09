@@ -68,6 +68,7 @@ class DashboardComponent extends React.Component {
           selectedLastName={this.state.selectedLastName}
           setSelectedFirstName={this.setSelectedFirstName}
           setSelectedLastName={this.setSelectedLastName}
+          hasSelectedOnce={this.state.hasSelectedOnce}
         ></ConvodisplayComponent>
 
         <ChatInputComponent

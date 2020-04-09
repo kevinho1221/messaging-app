@@ -24,7 +24,7 @@ class SignupComponent extends React.Component {
       email: "",
       password: "",
       passwordconf: "",
-      signuperror: ""
+      signuperror: "",
     };
   }
 
@@ -33,7 +33,7 @@ class SignupComponent extends React.Component {
 
     return (
       <div className={classes.main}>
-        <Paper>
+        <Paper className={classes.paperstyles}>
           <h1 align="center">Sign Up!</h1>
 
           <form onSubmit={this.submitForm}>
@@ -150,7 +150,7 @@ class SignupComponent extends React.Component {
     this.props.history.push("/login");
   };
 
-  submitForm = e => {
+  submitForm = (e) => {
     e.preventDefault();
     if (this.state.firstname != "" && this.state.lastname != "") {
       if (this.state.password === this.state.passwordconf) {
@@ -163,18 +163,18 @@ class SignupComponent extends React.Component {
     }
   };
 
-  userInputHandler = e => {
+  userInputHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
   addToFirebase = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {
+      .then((u) => {
         const theUser = {
           email: u.user.email,
           firstname: this.state.firstname,
-          lastname: this.state.lastname
+          lastname: this.state.lastname,
         };
         firestore()
           .collection("users")
@@ -184,7 +184,7 @@ class SignupComponent extends React.Component {
         console.log("signup up successfully");
         //console.log(u);
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ signuperror: err.toString() });
         console.log(err.toString());
       });

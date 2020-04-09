@@ -10,7 +10,6 @@ import Lock from "@material-ui/icons/Lock";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
 
 const firebase = require("firebase");
 
@@ -21,7 +20,7 @@ class LoginComponent extends React.Component {
       email: "",
       password: "",
       currentUser: null,
-      loginerror: ""
+      loginerror: "",
     };
   }
 
@@ -30,7 +29,7 @@ class LoginComponent extends React.Component {
 
     return (
       <div className={classes.main}>
-        <Paper>
+        <Paper className={classes.paperstyles}>
           <h1 align="center">Login Page</h1>
           <form onSubmit={this.submitForm}>
             <FormControl fullWidth>
@@ -90,19 +89,19 @@ class LoginComponent extends React.Component {
     );
   }
 
-  submitForm = e => {
+  submitForm = (e) => {
     e.preventDefault();
 
     if (this.state.email != "" && this.state.password != "") {
       this.toDashboard();
     } else {
       this.setState({
-        loginerror: "Error: Please enter a username and password."
+        loginerror: "Error: Please enter a username and password.",
       });
     }
   };
 
-  userInputHandler = e => {
+  userInputHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -114,10 +113,10 @@ class LoginComponent extends React.Component {
     await firebase
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {
+      .then((u) => {
         this.props.history.push("/dashboard");
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ loginerror: err.toString() });
       });
   };
