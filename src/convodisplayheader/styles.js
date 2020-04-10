@@ -4,7 +4,7 @@ const convodisplayheaderStyles = () => ({
     height: "80px",
     //height: "50px"
     marginLeft: "30%",
-    background: "violet",
+    background: "#F0F8FF",
     padding: "20px",
     position: "fixed",
     zIndex: "1",
@@ -12,6 +12,7 @@ const convodisplayheaderStyles = () => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    borderBottom: "1px solid grey",
   },
 
   avataruserWrapper: {

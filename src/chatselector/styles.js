@@ -19,8 +19,9 @@ const chatselectorStyles = () => ({
     overflow: "auto",
     //height: "100vh",
     height: "calc(100vh - 80px)",
-    background: "#83a4d4",
+    background: "#F0F8FF",
     left: "0",
+    borderRight: "1px solid grey",
   },
 });
 

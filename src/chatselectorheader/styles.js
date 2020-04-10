@@ -4,10 +4,14 @@ const chatselectorheaderStyles = () => ({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    background: "pink",
-    height: "60px",
+    background: "#F0F8FF",
+    height: "80px",
     position: "fixed",
-    width: "30%",
+    width: "30vw",
+    borderRight: "1px solid grey",
+    zIndex: "1",
+    boxSizing: "border-box",
+    //borderColor: "coral",
     //marginTop: "-60px",
   },
   autocompletestyles: {
@@ -36,7 +40,7 @@ const chatselectorheaderStyles = () => ({
   iconbuttonstyles: {
     width: "70px",
     borderRadius: "10px",
-    background: "red",
+    background: "#F0FFFF",
     "&:hover": {
       background: "green",
     },

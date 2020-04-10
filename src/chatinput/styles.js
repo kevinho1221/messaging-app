@@ -7,20 +7,25 @@ const chatinputStyles = () => ({
     position: "fixed",
     zIndex: "1",
     bottom: 0,
-    height: "50px",
+    height: "70px",
     boxSizing: "border-box",
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    borderTop: "1px solid grey",
+    background: "#F0F8FF",
   },
   chatTextBox: {
     width: "87%",
     marginLeft: "30px",
-    marginRight: "30px"
+    marginRight: "30px",
+    border: "1px solid grey",
+    borderRadius: "5px",
+    padding: "5px",
   },
   buttonstyle: {
-    height: "40px"
-  }
+    height: "40px",
+  },
 });
 
 export default chatinputStyles;

@@ -8,7 +8,7 @@ class ChatInputComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      message: ""
+      message: "",
     };
   }
 
@@ -23,6 +23,7 @@ class ChatInputComponent extends React.Component {
             onChange={this.handleInputChange}
             value={this.state.message}
             onKeyDown={this.onKeyDownHandler}
+            autoComplete="off"
           ></TextField>
           <Button
             color="primary"
@@ -38,7 +39,7 @@ class ChatInputComponent extends React.Component {
     }
   }
 
-  onKeyDownHandler = e => {
+  onKeyDownHandler = (e) => {
     if (e.key === "Enter") {
       this.sendMessage();
     }
@@ -48,7 +49,7 @@ class ChatInputComponent extends React.Component {
     await this.setState({ message: "" });
   };
 
-  handleInputChange = async e => {
+  handleInputChange = async (e) => {
     await this.setState({ message: e.target.value });
     //console.log(this.state.message);
   };
