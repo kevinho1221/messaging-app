@@ -53,6 +53,7 @@ class ChatSelectorHeaderComponent extends React.Component {
         <IconButton
           className={classes.iconbuttonstyles}
           onClick={this.handleNewMessageClick}
+          color="primary"
         >
           <Create className={classes.createstyles} />
         </IconButton>

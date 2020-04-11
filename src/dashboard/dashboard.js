@@ -18,7 +18,7 @@ class DashboardComponent extends React.Component {
       selectedchatIndex: 0,
       selectedmessages: [],
       hasSelectedOnce: false,
-      newChatWindow: false,
+      newChatWindow: true,
       newRecipient: "",
       selectedFirstName: "",
       selectedLastName: "",

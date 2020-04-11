@@ -77,18 +77,64 @@ class NewChatComponent extends React.Component {
       console.log(reason);
       //console.log(value);
       var autocompleteValue = document.getElementById("friends-list");
-      var thevalue = autocompleteValue.getAttribute("value");
-      await this.setState({ recipient: thevalue });
-      this.props.setNewRecipient(this.state.recipient);
+      var thevalue = autocompleteValue.getAttribute("value").trim();
 
-      console.log(thevalue);
-      console.log(this.state.recipient);
+      await this.setState({ recipient: thevalue });
+
+      const chatList = this.props.chats.map(
+        (chat) =>
+          chat.users.filter((email) => email != this.props.currentuser)[0]
+      );
+      if (chatList.includes(thevalue) == true) {
+        const selectIndex = chatList.indexOf(this.state.recipient);
+        this.props.setSelectedchatIndex(selectIndex);
+        this.props.setSelectedmessages();
+        this.props.changeSelectedIndexofChatSelector(selectIndex);
+
+        const userList = this.props.users;
+        const friendsList = userList.filter((user) =>
+          chatList.includes(user.email)
+        );
+
+        this.props.setSelectedFirstName(friendsList[selectIndex].firstname);
+        this.props.setSelectedLastName(friendsList[selectIndex].lastname);
+      } else {
+        this.props.setNewRecipient(this.state.recipient);
+
+        console.log(thevalue);
+        console.log(this.state.recipient);
+      }
     }
   };
 
   onChangeHandler = async (event, value, reason) => {
     if (value) {
-      if (reason == "select-option") {
+      if (event.key === "Enter") {
+        value = value.trim();
+        const chatList = this.props.chats.map(
+          (chat) =>
+            chat.users.filter((email) => email != this.props.currentuser)[0]
+        );
+        if (chatList.includes(value) == true) {
+          const selectIndex = chatList.indexOf(value);
+          this.props.setSelectedchatIndex(selectIndex);
+          this.props.setSelectedmessages();
+          this.props.changeSelectedIndexofChatSelector(selectIndex);
+
+          const userList = this.props.users;
+          const friendsList = userList.filter((user) =>
+            chatList.includes(user.email)
+          );
+
+          this.props.setSelectedFirstName(friendsList[selectIndex].firstname);
+          this.props.setSelectedLastName(friendsList[selectIndex].lastname);
+        } else {
+          this.props.setNewRecipient(this.state.recipient);
+
+          console.log(value);
+          console.log(this.state.recipient);
+        }
+      } else if (reason == "select-option") {
         this.props.setKnownRecipient(true);
         await this.setState({ recipient: value.email });
 

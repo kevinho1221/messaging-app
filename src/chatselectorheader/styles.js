@@ -40,10 +40,9 @@ const chatselectorheaderStyles = () => ({
   iconbuttonstyles: {
     width: "70px",
     borderRadius: "10px",
-    background: "#F0FFFF",
-    "&:hover": {
-      background: "green",
-    },
+    //borderColor: "grey",
+    //background: "#E0EEEE",
+    "&:hover": {},
 
     marginRight: "20px",
   },
