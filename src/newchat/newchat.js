@@ -85,6 +85,9 @@ class NewChatComponent extends React.Component {
         (chat) =>
           chat.users.filter((email) => email != this.props.currentuser)[0]
       );
+      if (value == this.props.currentuser) {
+        return;
+      }
       if (chatList.includes(thevalue) == true) {
         const selectIndex = chatList.indexOf(this.state.recipient);
         this.props.setSelectedchatIndex(selectIndex);
@@ -111,6 +114,10 @@ class NewChatComponent extends React.Component {
     if (value) {
       if (event.key === "Enter") {
         value = value.trim();
+        if (value == this.props.currentuser) {
+          return;
+        }
+        await this.setState({ recipient: value });
         const chatList = this.props.chats.map(
           (chat) =>
             chat.users.filter((email) => email != this.props.currentuser)[0]
@@ -129,6 +136,7 @@ class NewChatComponent extends React.Component {
           this.props.setSelectedFirstName(friendsList[selectIndex].firstname);
           this.props.setSelectedLastName(friendsList[selectIndex].lastname);
         } else {
+          await this.setState({ recipient: value });
           this.props.setNewRecipient(this.state.recipient);
 
           console.log(value);

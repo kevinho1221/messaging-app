@@ -49,6 +49,7 @@ class DashboardComponent extends React.Component {
             //for the chat header of the convodisplay component
             setSelectedFirstName={this.setSelectedFirstName}
             setSelectedLastName={this.setSelectedLastName}
+            setHasRead={this.setHasRead}
           ></ChatSelectorComponent>
 
           <ConvodisplayComponent
@@ -85,6 +86,27 @@ class DashboardComponent extends React.Component {
       return <div></div>;
     }
   }
+
+  setHasRead = () => {
+    const docName = this.getDocName();
+    const messageLength = this.state.chats[this.state.selectedchatIndex]
+      .messages.length;
+    const lastSender = this.state.chats[this.state.selectedchatIndex].messages[
+      messageLength - 1
+    ].sender;
+
+    console.log(lastSender);
+
+    if (lastSender !== this.state.email) {
+      firebase
+        .firestore()
+        .collection("chats")
+        .doc(docName)
+        .update({ hasRead: true });
+    } else {
+      console.log("I sent the last message");
+    }
+  };
 
   logout = () => {
     firebase.auth().signOut();
@@ -132,9 +154,11 @@ class DashboardComponent extends React.Component {
                 {
                   message: message,
                   sender: this.state.email,
+                  timestamp: Date.now(),
                 },
               ],
               users: [this.state.email, this.state.newRecipient],
+              hasRead: false,
             });
           //sets which chat selection is highlighted
           this.changeSelectedIndexofChatSelector(
@@ -147,6 +171,11 @@ class DashboardComponent extends React.Component {
           );
           this.setSelectedmessages();
           console.log(this.findIndexOfRecipient(this.state.newRecipient));
+
+          this.setFirstAndLastName(
+            this.findIndexOfRecipient(this.state.newRecipient)
+          );
+          //console.log("yo");
         }
       } else {
         console.log("NOT A VALID EMAIL");
@@ -164,10 +193,23 @@ class DashboardComponent extends React.Component {
               sender: this.state.email,
               timestamp: Date.now(),
             }),
+            hasRead: false,
           })
           .then(console.log("Message Sent"));
       }
     }
+  };
+
+  setFirstAndLastName = (index) => {
+    const chatList = this.state.chats.map(
+      (chat) => chat.users.filter((email) => email != this.state.email)[0]
+    );
+    const userList = this.state.users;
+    const friendsList = userList.filter((user) =>
+      chatList.includes(user.email)
+    );
+    this.setSelectedFirstName(friendsList[index].firstname);
+    this.setSelectedLastName(friendsList[index].lastname);
   };
 
   findIndexOfRecipient = (recipient) => {

@@ -23,6 +23,27 @@ const chatselectorStyles = () => ({
     left: "0",
     borderRight: "1px solid grey",
   },
+  listItemContainer: {
+    //display: "flex",
+    //alignItems: "center",
+    backgroundColor: "red",
+    borderColor: "red",
+  },
+  listItemUnread: {
+    fontWeight: "900",
+    marginRight: "30px",
+  },
+  unread: {
+    background: "#E0EEEE",
+    "&hover": {
+      background: "#F0FFFF",
+    },
+  },
+  unreadDot: {
+    color: "#1976d2",
+    marginLeft: "300px",
+    marginRight: "10px",
+  },
 });
 
 export default chatselectorStyles;

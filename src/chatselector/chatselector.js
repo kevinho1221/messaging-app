@@ -6,6 +6,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ChatSelectorHeaderComponent from "../chatselectorheader/chatselectorheader";
 import ChatSelectorAvatarComponent from "../chatselectoravatar/chatselectoravatar";
+import Typography from "@material-ui/core/Typography";
+import Badge from "@material-ui/core/Badge";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 
 class ChatSelectorComponent extends React.Component {
   constructor() {
@@ -39,30 +42,67 @@ class ChatSelectorComponent extends React.Component {
         <div className={classes.list}>
           <List>
             {this.props.chats.map((chat, index) => {
-              /*console.log(
-                chat.users.filter(user => user !== this.props.currentuser)
-              );*/
-              return (
-                <div key={index}>
-                  <ListItem
-                    button
-                    selected={this.state.selectedIndex === index}
-                    onClick={(e) => {
-                      this.handleListItemClick(index);
-                    }}
-                  >
-                    <ListItemText
-                      primary={this.setFullName(chat)}
-                    ></ListItemText>
-                  </ListItem>
-                </div>
-              );
+              console.log(chat.hasRead);
+              console.log(this.wasLastSender(chat));
+              if (chat.hasRead == false && this.wasLastSender(chat) == false) {
+                return (
+                  <div key={index}>
+                    <ListItem
+                      button
+                      selected={this.state.selectedIndex === index}
+                      onClick={(e) => {
+                        this.handleListItemClick(index);
+                      }}
+                      className={classes.unread}
+                    >
+                      <ListItemText
+                        primary={
+                          <div>
+                            <Typography className={classes.listItemUnread}>
+                              {this.setFullName(chat)}
+                            </Typography>
+                          </div>
+                        }
+                        //primary={this.setFullName(chat) + "new"}
+                      ></ListItemText>
+                    </ListItem>
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={index}>
+                    <ListItem
+                      button
+                      selected={this.state.selectedIndex === index}
+                      onClick={(e) => {
+                        this.handleListItemClick(index);
+                      }}
+                    >
+                      <ListItemText
+                        primary={this.setFullName(chat)}
+                      ></ListItemText>
+                    </ListItem>
+                  </div>
+                );
+              }
             })}
           </List>
         </div>
       </div>
     );
   }
+
+  //checking if the current user is the last sender
+  wasLastSender = (chat) => {
+    const lastSender = chat.messages[chat.messages.length - 1].sender;
+    return lastSender === this.props.currentuser;
+    /*const messageLength = this.props.chats[this.props.selectedchatIndex]
+      .messages.length;
+    const lastSender = this.props.chats[this.props.selectedchatIndex].messages[
+      messageLength - 1
+    ].sender;
+    return lastSender === this.props.currentuser;*/
+  };
 
   setFullName = (chat) => {
     const otherUser = chat.users.filter(
@@ -104,6 +144,7 @@ class ChatSelectorComponent extends React.Component {
     await this.props.setSelectedchatIndex(index);
     await this.props.setSelectedmessages();
     await this.setSelectedFirstandLastName(index);
+    await this.props.setHasRead();
   };
 
   setSelectedIndex = async (index) => {
