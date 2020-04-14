@@ -2,7 +2,6 @@ const newchatStyles = () => ({
   convoheader: {
     width: "70vw",
     height: "80px",
-    //height: "50px"
     marginLeft: "30%",
     background: "#ABD7D8",
     padding: "20px",
@@ -21,20 +20,12 @@ const newchatStyles = () => ({
     width: "70vw",
     marginLeft: "30%",
     position: "absolute",
-    //top: "50px",
     top: "80px",
     overflow: "auto",
-    //height: "calc(100vh - 100px)",
     height: "calc(100vh - 130px)",
     background: "yellow",
-    //overflowY: "scroll",
     boxSizing: "border-box",
-    //padding: "10px",
     border: "10px yellow solid",
-
-    //need to somehow get padding
-    //maybe psudoelement?
-    //the padding works without using display flex
   },
   messagesUser: {
     width: "30%",
@@ -47,7 +38,6 @@ const newchatStyles = () => ({
     wordWrap: "break-word",
     boxSizing: "border-box",
     marginTop: "10px",
-    //margin: "auto"
   },
   messagesOther: {
     width: "30%",
@@ -60,7 +50,6 @@ const newchatStyles = () => ({
     wordWrap: "break-word",
     boxSizing: "border-box",
     marginTop: "10px",
-    //margin: "auto"
   },
   autocompletestyles: {
     width: "1000px",

@@ -43,8 +43,8 @@ class ChatSelectorComponent extends React.Component {
         <div className={classes.list}>
           <List>
             {this.props.chats.map((chat, index) => {
-              console.log(chat.hasRead);
-              console.log(this.wasLastSender(chat));
+              //console.log(chat.hasRead);
+              //console.log(this.wasLastSender(chat));
               if (chat.hasRead == false && this.wasLastSender(chat) == false) {
                 return (
                   <div key={index}>
@@ -64,7 +64,6 @@ class ChatSelectorComponent extends React.Component {
                             </Typography>
                           </div>
                         }
-                        //primary={this.setFullName(chat) + "new"}
                       ></ListItemText>
                     </ListItem>
                   </div>
@@ -97,12 +96,6 @@ class ChatSelectorComponent extends React.Component {
   wasLastSender = (chat) => {
     const lastSender = chat.messages[chat.messages.length - 1].sender;
     return lastSender === this.props.currentuser;
-    /*const messageLength = this.props.chats[this.props.selectedchatIndex]
-      .messages.length;
-    const lastSender = this.props.chats[this.props.selectedchatIndex].messages[
-      messageLength - 1
-    ].sender;
-    return lastSender === this.props.currentuser;*/
   };
 
   setFullName = (chat) => {
@@ -114,10 +107,6 @@ class ChatSelectorComponent extends React.Component {
       otherUser.includes(user.email)
     );
 
-    /*return filteredOtherUser.map((user) =>
-      [user.firstname, user.lastname].join(" ")
-    );*/
-
     const firstname = filteredOtherUser
       .map((user) => user.firstname)
       .toString();
@@ -128,9 +117,6 @@ class ChatSelectorComponent extends React.Component {
 
     return (
       <ChatSelectorAvatarComponent
-        /*fullname={filteredOtherUser.map((user) =>
-          [user.firstname, user.lastname].join(" ")
-        )}*/
         firstinit={firstinit}
         lastinit={lastinit}
         fullname={firstname + " " + lastname}
@@ -161,7 +147,7 @@ class ChatSelectorComponent extends React.Component {
     const friendsList = userList.filter((user) =>
       chatList.includes(user.email)
     );
-    console.log(friendsList);
+    //console.log(friendsList);
     await this.props.setSelectedFirstName(friendsList[index].firstname);
     await this.props.setSelectedLastName(friendsList[index].lastname);
   };

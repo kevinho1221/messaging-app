@@ -25,7 +25,7 @@ class ChatSelectorHeaderComponent extends React.Component {
     const friendsList = userList.filter((user) =>
       chatList.includes(user.email)
     );
-    console.log(this.props.chats);
+    //console.log(this.props.chats);
 
     return (
       <div className={classes.main}>
@@ -83,8 +83,6 @@ class ChatSelectorHeaderComponent extends React.Component {
         await this.props.setSelectedLastName(value.lastname);
         await this.props.setHasRead();
       }
-
-      //this.props.changeSelectedIndexofChatSelector(selectIndex);
     }
   };
 

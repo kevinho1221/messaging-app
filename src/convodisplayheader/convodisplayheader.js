@@ -45,16 +45,6 @@ class ConvoDisplayHeaderComponent extends React.Component {
     );
   }
 }
-/*
-<Button
-              //color="primary"
-              variant="contained"
-              className={classes.button}
-              onClick={this.props.logout}
-            >
-              Log Out
-            </Button>
-            */
 
 export default withStyles(convodisplayheaderStyles)(
   ConvoDisplayHeaderComponent

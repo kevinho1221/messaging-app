@@ -11,30 +11,11 @@ const chatselectorheaderStyles = () => ({
     borderRight: "1px solid grey",
     zIndex: "1",
     boxSizing: "border-box",
-    //borderColor: "coral",
-    //marginTop: "-60px",
   },
   autocompletestyles: {
     width: "300px",
     padding: "20px",
-
-    //borderRadius: "15px"
   },
-  /*iconcontainer: {
-    width: "40px",
-    height: "40px",
-    background: "lightgreen",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-around",
-    "&:hover": {
-      cursor: "pointer",
-    },
-    "&:focus": {
-      outline: "0",
-      borderColor: "#45a29e",
-    },
-  },*/
   createstyles: {
     fontSize: "30px",
   },

@@ -2,7 +2,6 @@ const convodisplayheaderStyles = () => ({
   main: {
     width: "70vw",
     height: "80px",
-    //height: "50px"
     marginLeft: "30%",
     background: "#ABD7D8",
     padding: "20px",

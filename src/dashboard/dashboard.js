@@ -80,11 +80,11 @@ class DashboardComponent extends React.Component {
             hasSelectedOnce={this.state.hasSelectedOnce}
             newChatWindow={this.state.newChatWindow}
             setHasRead={this.setHasRead}
+            chats={this.state.chats}
           ></ChatInputComponent>
         </div>
       );
     } else {
-      //this.props.history.push("/login");
       return <div></div>;
     }
   }
@@ -97,7 +97,7 @@ class DashboardComponent extends React.Component {
       messageLength - 1
     ].sender;
 
-    console.log(lastSender);
+    //console.log(lastSender);
 
     if (lastSender !== this.state.email) {
       firebase
@@ -106,24 +106,24 @@ class DashboardComponent extends React.Component {
         .doc(docName)
         .update({ hasRead: true });
     } else {
-      console.log("I sent the last message");
+      //console.log("I sent the last message");
     }
   };
 
   logout = () => {
     firebase.auth().signOut();
     this.props.history.push("/login");
-    console.log("loggedout");
+    //console.log("loggedout");
   };
 
   setSelectedFirstName = async (firstname) => {
     await this.setState({ selectedFirstName: firstname });
-    console.log(this.state.selectedFirstName);
+    //console.log(this.state.selectedFirstName);
   };
 
   setSelectedLastName = async (lastname) => {
     await this.setState({ selectedLastName: lastname });
-    console.log(this.state.selectedLastName);
+    //console.log(this.state.selectedLastName);
   };
 
   setNewRecipient = async (recipient) => {
@@ -142,8 +142,8 @@ class DashboardComponent extends React.Component {
 
   sendMessage = async (message) => {
     if (this.state.newChatWindow == true) {
-      console.log("newchatwindow");
-      console.log(this.state.newRecipient);
+      //console.log("newchatwindow");
+      //console.log(this.state.newRecipient);
       if (await this.validRecipient()) {
         if (message.replace(/\s/g, "").length) {
           const newRecipientDocName = this.buildNewRecipientDocName();
@@ -172,7 +172,7 @@ class DashboardComponent extends React.Component {
             this.findIndexOfRecipient(this.state.newRecipient)
           );
           this.setSelectedmessages();
-          console.log(this.findIndexOfRecipient(this.state.newRecipient));
+          //console.log(this.findIndexOfRecipient(this.state.newRecipient));
 
           this.setFirstAndLastName(
             this.findIndexOfRecipient(this.state.newRecipient)
@@ -180,7 +180,7 @@ class DashboardComponent extends React.Component {
           //console.log("yo");
         }
       } else {
-        console.log("NOT A VALID EMAIL");
+        //console.log("NOT A VALID EMAIL");
       }
     } else {
       if (message.replace(/\s/g, "").length) {
@@ -197,7 +197,7 @@ class DashboardComponent extends React.Component {
             }),
             hasRead: false,
           })
-          .then(console.log("Message Sent"));
+          .then(/*console.log("Message Sent")*/);
       }
     }
   };
@@ -234,7 +234,7 @@ class DashboardComponent extends React.Component {
     const getUsers = await firebase.firestore().collection("users").get();
     const users = getUsers.docs.map((doc) => doc.data().email);
     var valid = users.includes(this.state.newRecipient);
-    console.log(valid);
+    //console.log(valid);
 
     return valid;
   };
@@ -261,7 +261,7 @@ class DashboardComponent extends React.Component {
 
     this.setState({ newChatWindow: false });
     //console.log(this.state.selectedchatIndex);
-    console.log(this.state.chats[this.state.selectedchatIndex].users);
+    //console.log(this.state.chats[this.state.selectedchatIndex].users);
   };
 
   setSelectedmessages = () => {
@@ -275,7 +275,7 @@ class DashboardComponent extends React.Component {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         this.setState({ email: user.email });
-        console.log(user.email);
+        //console.log(user.email);
         await firebase
           .firestore()
           .collection("chats")

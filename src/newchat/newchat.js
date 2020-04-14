@@ -79,7 +79,7 @@ class NewChatComponent extends React.Component {
   handleClose = async (event, value, reason) => {
     //Runs this if user clicks stats typing and clicks off of the autocomplete box
     if (reason == "blur") {
-      console.log(reason);
+      //console.log(reason);
       //console.log(value);
       var autocompleteValue = document.getElementById("friends-list");
       var thevalue = autocompleteValue.getAttribute("value").trim();
@@ -110,8 +110,8 @@ class NewChatComponent extends React.Component {
       } else {
         this.props.setNewRecipient(this.state.recipient);
 
-        console.log(thevalue);
-        console.log(this.state.recipient);
+        //console.log(thevalue);
+        //console.log(this.state.recipient);
       }
     }
   };
@@ -146,8 +146,8 @@ class NewChatComponent extends React.Component {
           await this.setState({ recipient: value });
           this.props.setNewRecipient(this.state.recipient);
 
-          console.log(value);
-          console.log(this.state.recipient);
+          //console.log(value);
+          //console.log(this.state.recipient);
         }
       } else if (reason == "select-option") {
         this.props.setKnownRecipient(true);
@@ -171,10 +171,10 @@ class NewChatComponent extends React.Component {
         this.props.setSelectedLastName(friendsList[selectIndex].lastname);
         this.props.setHasRead();
 
-        console.log(reason);
-        console.log(value);
-        console.log(this.state.recipient);
-        console.log(selectIndex);
+        //console.log(reason);
+        //console.log(value);
+        //console.log(this.state.recipient);
+        //console.log(selectIndex);
 
         //this.setRecipient();
       } else {
@@ -182,10 +182,6 @@ class NewChatComponent extends React.Component {
         this.props.setKnownRecipient(false);
         await this.setState({ recipient: value });
         this.props.setNewRecipient(this.state.recipient);
-
-        console.log(reason);
-        console.log(value);
-        console.log(this.state.recipient);
       }
     }
   };

@@ -16,29 +16,7 @@ class ChatInputComponent extends React.Component {
 
   render() {
     const { classes } = this.props;
-    /*if (this.props.hasSelectedOnce == true) {
-      return (
-        <div className={classes.main}>
-          <TextField
-            id="chatTextBox"
-            className={classes.chatTextBox}
-            onChange={this.handleInputChange}
-            value={this.state.message}
-            onKeyDown={this.onKeyDownHandler}
-            autoComplete="off"
-          ></TextField>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={this.sendMessage}
-          >
-            Send
-          </Button>
-        </div>
-      );
-    } else {
-      return <div className={classes.main}></div>;
-    }*/
+
     return (
       <div className={classes.main}>
         <TextField
@@ -60,19 +38,10 @@ class ChatInputComponent extends React.Component {
     );
   }
 
-  /*
-   <Button
-          className={classes.buttonstyle}
-          //color="primary"
-          variant="contained"
-          onClick={this.sendMessage}
-        >
-          Send
-        </Button>
-      */
-
   onFocusHandler = () => {
-    this.props.setHasRead();
+    if (Array.isArray(this.props.chats) && this.props.chats.length) {
+      this.props.setHasRead();
+    }
   };
 
   onKeyDownHandler = (e) => {

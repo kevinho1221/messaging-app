@@ -70,7 +70,6 @@ class convodisplayComponent extends React.Component {
                 hasSelectedOnce={this.props.hasSelectedOnce}
                 logout={this.props.logout}
               ></ConvoDisplayHeaderComponent>
-              {/*this.props.selectedFirstName + " " + this.props.selectedLastName*/}
             </div>
             <div className={classes.messages} id="convodisplay">
               {[...this.props.selectedmessages]
@@ -110,32 +109,6 @@ class convodisplayComponent extends React.Component {
     const container = document.getElementById("convodisplay");
     if (container) container.scrollTo(0, container.scrollHeight);
   };
-
-  /*componentDidMount = () => {
-    firebase.auth().onAuthStateChanged(async user => {
-      if (user) {
-        this.setState({ email: user.email });
-
-        await firebase
-          .firestore()
-          .collection("chats")
-          .where("users", "array-contains", user.email)
-          .get()
-          .then(async snapshot => {
-            console.log(
-              snapshot.docs[this.props.selectedchatIndex].data().messages
-            );
-            await this.setState({
-              selectedchat: snapshot.docs[this.props.selectedchatIndex].data()
-                .messages
-            });
-          })
-          .catch(err => {
-            console.log("Error getting documents", err);
-          });
-      }
-    });
-  };*/
 }
 
 export default withStyles(convodisplayStyles)(convodisplayComponent);
