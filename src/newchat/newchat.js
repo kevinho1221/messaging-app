@@ -4,6 +4,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import IconButton from "@material-ui/core/IconButton";
 
 class NewChatComponent extends React.Component {
   constructor() {
@@ -53,18 +55,21 @@ class NewChatComponent extends React.Component {
               this.handleClose(event, this.state.recipient, reason);
             }}
             renderInput={(params) => (
-              <TextField {...params} label="To:" variant="outlined" />
+              <TextField
+                className={classes.suggestedItem}
+                {...params}
+                label="To:"
+                variant="outlined"
+              />
             )}
           />
           <div className={classes.buttoncontainer}>
-            <Button
-              color="primary"
-              variant="contained"
-              className={classes.button}
+            <IconButton
+              className={classes.iconbuttonstyles}
               onClick={this.props.logout}
             >
-              Log Out
-            </Button>
+              <ExitToAppIcon className={classes.exitIcon}></ExitToAppIcon>
+            </IconButton>
           </div>
         </div>
       </div>
@@ -101,6 +106,7 @@ class NewChatComponent extends React.Component {
 
         this.props.setSelectedFirstName(friendsList[selectIndex].firstname);
         this.props.setSelectedLastName(friendsList[selectIndex].lastname);
+        this.props.setHasRead();
       } else {
         this.props.setNewRecipient(this.state.recipient);
 
@@ -135,6 +141,7 @@ class NewChatComponent extends React.Component {
 
           this.props.setSelectedFirstName(friendsList[selectIndex].firstname);
           this.props.setSelectedLastName(friendsList[selectIndex].lastname);
+          this.props.setHasRead();
         } else {
           await this.setState({ recipient: value });
           this.props.setNewRecipient(this.state.recipient);
@@ -162,6 +169,7 @@ class NewChatComponent extends React.Component {
 
         this.props.setSelectedFirstName(friendsList[selectIndex].firstname);
         this.props.setSelectedLastName(friendsList[selectIndex].lastname);
+        this.props.setHasRead();
 
         console.log(reason);
         console.log(value);

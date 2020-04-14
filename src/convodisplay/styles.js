@@ -22,11 +22,11 @@ const convodisplayStyles = () => ({
     overflow: "auto",
     //height: "calc(100vh - 100px)",
     height: "calc(100vh - 150px)",
-    background: "#FFFFFE",
+    background: "#FFFFF3",
     //overflowY: "scroll",
     boxSizing: "border-box",
     //padding: "10px",
-    border: "10px #FFFFFE solid",
+    border: "10px #FFFFF3 solid",
 
     //need to somehow get padding
     //maybe psudoelement?
@@ -34,7 +34,7 @@ const convodisplayStyles = () => ({
   },
   messagesUser: {
     width: "30%",
-    background: "#1976d2",
+    background: "#67A9A8",
     float: "right",
     clear: "both",
     padding: "20px",
@@ -48,7 +48,7 @@ const convodisplayStyles = () => ({
   },
   messagesOther: {
     width: "30%",
-    background: "#EBECE4",
+    background: "#DCC497",
     float: "left",
     clear: "both",
     padding: "20px",

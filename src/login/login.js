@@ -74,7 +74,7 @@ class LoginComponent extends React.Component {
               className={classes.buttonstyle}
               type="submit"
               variant="contained"
-              color="primary"
+              //color="primary"
               fullWidth
             >
               Log In

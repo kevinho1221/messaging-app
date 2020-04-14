@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, HashRouter as Router } from "react-router-dom";
 import LoginComponent from "./login/login";
 import SignupComponent from "./signup/signup";
 import DashboardComponent from "./dashboard/dashboard";
@@ -18,7 +18,7 @@ firebase.initializeApp({
   storageBucket: "messaging-app-dc03d.appspot.com",
   messagingSenderId: "462664318963",
   appId: "1:462664318963:web:abef1551f827da1da09c86",
-  measurementId: "G-XPQFN9TSD9"
+  measurementId: "G-XPQFN9TSD9",
 });
 
 const routing = (

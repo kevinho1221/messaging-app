@@ -72,12 +72,14 @@ class DashboardComponent extends React.Component {
             setSelectedLastName={this.setSelectedLastName}
             hasSelectedOnce={this.state.hasSelectedOnce}
             logout={this.logout}
+            setHasRead={this.setHasRead}
           ></ConvodisplayComponent>
 
           <ChatInputComponent
             sendMessage={this.sendMessage}
             hasSelectedOnce={this.state.hasSelectedOnce}
             newChatWindow={this.state.newChatWindow}
+            setHasRead={this.setHasRead}
           ></ChatInputComponent>
         </div>
       );

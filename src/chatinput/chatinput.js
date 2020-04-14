@@ -3,6 +3,8 @@ import chatinputStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import SendIcon from "@material-ui/icons/Send";
+import IconButton from "@material-ui/core/IconButton";
 
 class ChatInputComponent extends React.Component {
   constructor() {
@@ -46,13 +48,32 @@ class ChatInputComponent extends React.Component {
           value={this.state.message}
           onKeyDown={this.onKeyDownHandler}
           autoComplete="off"
+          onFocus={this.onFocusHandler}
         ></TextField>
-        <Button color="primary" variant="contained" onClick={this.sendMessage}>
-          Send
-        </Button>
+        <IconButton
+          className={classes.iconbuttonstyles}
+          onClick={this.sendMessage}
+        >
+          <SendIcon className={classes.sendIcon}></SendIcon>
+        </IconButton>
       </div>
     );
   }
+
+  /*
+   <Button
+          className={classes.buttonstyle}
+          //color="primary"
+          variant="contained"
+          onClick={this.sendMessage}
+        >
+          Send
+        </Button>
+      */
+
+  onFocusHandler = () => {
+    this.props.setHasRead();
+  };
 
   onKeyDownHandler = (e) => {
     if (e.key === "Enter") {

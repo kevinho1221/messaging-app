@@ -38,6 +38,7 @@ class ChatSelectorComponent extends React.Component {
           }
           setSelectedFirstName={this.props.setSelectedFirstName}
           setSelectedLastName={this.props.setSelectedLastName}
+          setHasRead={this.props.setHasRead}
         ></ChatSelectorHeaderComponent>
         <div className={classes.list}>
           <List>

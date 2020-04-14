@@ -33,6 +33,7 @@ class convodisplayComponent extends React.Component {
               setSelectedFirstName={this.props.setSelectedFirstName}
               setSelectedLastName={this.props.setSelectedLastName}
               logout={this.props.logout}
+              setHasRead={this.props.setHasRead}
             ></NewChatComponent>
 
             {this.state.knownRecipient ? (

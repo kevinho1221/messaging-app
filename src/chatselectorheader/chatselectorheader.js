@@ -47,7 +47,12 @@ class ChatSelectorHeaderComponent extends React.Component {
           }
           edge="start"
           renderInput={(params) => (
-            <TextField {...params} label="Search Friends" variant="outlined" />
+            <TextField
+              className={classes.suggestedItem}
+              {...params}
+              label="Search Friends"
+              variant="outlined"
+            />
           )}
         />
         <IconButton
@@ -76,6 +81,7 @@ class ChatSelectorHeaderComponent extends React.Component {
 
         await this.props.setSelectedFirstName(value.firstname);
         await this.props.setSelectedLastName(value.lastname);
+        await this.props.setHasRead();
       }
 
       //this.props.changeSelectedIndexofChatSelector(selectIndex);

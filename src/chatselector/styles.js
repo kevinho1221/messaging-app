@@ -19,7 +19,7 @@ const chatselectorStyles = () => ({
     overflow: "auto",
     //height: "100vh",
     height: "calc(100vh - 80px)",
-    background: "#F0F8FF",
+    background: "#ABD7D8",
     left: "0",
     borderRight: "1px solid grey",
   },
@@ -34,10 +34,7 @@ const chatselectorStyles = () => ({
     marginRight: "30px",
   },
   unread: {
-    background: "#E0EEEE",
-    "&hover": {
-      background: "#F0FFFF",
-    },
+    background: "#67A9A8",
   },
   unreadDot: {
     color: "#1976d2",

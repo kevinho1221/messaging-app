@@ -12,6 +12,7 @@ const convoheaderavatarStyles = () => ({
   name: {
     marginLeft: "20px",
     boxSizing: "border-box",
+    fontSize: "100px",
   },
 });
 

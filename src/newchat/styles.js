@@ -4,7 +4,7 @@ const newchatStyles = () => ({
     height: "80px",
     //height: "50px"
     marginLeft: "30%",
-    background: "#F0F8FF",
+    background: "#ABD7D8",
     padding: "20px",
     position: "fixed",
     zIndex: "1",
@@ -74,6 +74,22 @@ const newchatStyles = () => ({
   button: {
     height: "40px",
     width: "100px",
+    background: "#2C7379",
+    color: "#FFFFFD",
+  },
+  suggestedItem: {
+    background: "#FFFFFD",
+    borderRadius: "10px",
+    border: "1px solid grey",
+  },
+  exitIcon: {
+    fontSize: "40px",
+  },
+  iconbuttonstyles: {
+    width: "70px",
+    borderRadius: "10px",
+    color: "#2C7379",
+    marginRight: "20px",
   },
 });
 

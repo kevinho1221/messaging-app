@@ -3,6 +3,8 @@ import convodisplayheaderStyles from "./styles.js";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Avatar } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import IconButton from "@material-ui/core/IconButton";
 
 class ConvoDisplayHeaderComponent extends React.Component {
   render() {
@@ -20,32 +22,39 @@ class ConvoDisplayHeaderComponent extends React.Component {
                 {this.props.firstname + " " + this.props.lastname}
               </div>
             </div>
-            <Button
-              color="primary"
-              variant="contained"
-              className={classes.button}
+            <div className={classes.avataruserWrapper}> </div>
+            <IconButton
+              className={classes.iconbuttonstyles}
               onClick={this.props.logout}
             >
-              Log Out
-            </Button>
+              <ExitToAppIcon className={classes.exitIcon}></ExitToAppIcon>
+            </IconButton>
           </div>
         ) : (
           <div className={classes.main}>
             <div className={classes.avataruserWrapper}> </div>
-            <Button
-              color="primary"
-              variant="contained"
-              className={classes.button}
+            <IconButton
+              className={classes.iconbuttonstyles}
               onClick={this.props.logout}
             >
-              Log Out
-            </Button>
+              <ExitToAppIcon className={classes.exitIcon}></ExitToAppIcon>
+            </IconButton>
           </div>
         )}
       </div>
     );
   }
 }
+/*
+<Button
+              //color="primary"
+              variant="contained"
+              className={classes.button}
+              onClick={this.props.logout}
+            >
+              Log Out
+            </Button>
+            */
 
 export default withStyles(convodisplayheaderStyles)(
   ConvoDisplayHeaderComponent

@@ -4,7 +4,7 @@ const chatselectorheaderStyles = () => ({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    background: "#F0F8FF",
+    background: "#ABD7D8",
     height: "80px",
     position: "fixed",
     width: "30vw",
@@ -17,6 +17,7 @@ const chatselectorheaderStyles = () => ({
   autocompletestyles: {
     width: "300px",
     padding: "20px",
+
     //borderRadius: "15px"
   },
   /*iconcontainer: {
@@ -40,11 +41,13 @@ const chatselectorheaderStyles = () => ({
   iconbuttonstyles: {
     width: "70px",
     borderRadius: "10px",
-    //borderColor: "grey",
-    //background: "#E0EEEE",
-    "&:hover": {},
-
+    color: "#2C7379",
     marginRight: "20px",
+  },
+  suggestedItem: {
+    background: "#FFFFFD",
+    borderRadius: "10px",
+    border: "1px solid grey",
   },
 });
 
