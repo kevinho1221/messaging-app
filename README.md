@@ -1,3 +1,20 @@
+This is my very own messaging app built using React! 
+
+You can access the website at https://kevinho1221.github.io/messaging-app/#/
+
+To use a test user, feel free to login with the account below:
+Email: bobparker@test.com
+Password: password
+
+You can also test sending a message to these pre-made accounts:
+lukelopez@test.com
+sharonkim@test.com
+
+I will be continuously working on new features to improve the app as much as possible!
+Pleae enjoy using my messaging application!
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
