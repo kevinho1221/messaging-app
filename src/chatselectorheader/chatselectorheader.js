@@ -74,7 +74,7 @@ class ChatSelectorHeaderComponent extends React.Component {
             chat.users.filter((email) => email != this.props.currentuser)[0]
         );
         const selectIndex = chatList.indexOf(value.email);
-        console.log(selectIndex);
+        //console.log(selectIndex);
         await this.props.setSelectedchatIndex(selectIndex);
         await this.props.setSelectedmessages();
         await this.props.changeSelectedIndexofChatSelector(selectIndex);
